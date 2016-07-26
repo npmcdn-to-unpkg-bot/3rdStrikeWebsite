@@ -4,10 +4,23 @@
 <div class="container">
 	<div class="page-header">
 		{% if username %}
-			<h1>{{username}} is ranked...</h1>
+			<h1>Check your rankings among some of the best</h1>
 		{% else %}
 			<h1>Leaderboard</h1>
 		{% endif %}
 	</div>
 </div>
+{% if region == "Chicago" %}
+<div class="container">
+	<ol>
+		<li>Quentin</li>
+		<li>Adam</li>
+		<li>Kerry</li>
+	</ol>
+</div>
+{% else %}
+	<ol>
+		<li>Arbitrary Leaderboard</li>
+	</ol>
+{% endif %}
 {% endblock %}
