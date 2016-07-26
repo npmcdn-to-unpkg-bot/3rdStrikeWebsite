@@ -13,7 +13,7 @@
 	{% endblock %}
 	<div class="page-header">
 
-		{% if username %}
+		{% if username and username != None %}
 			<h1>Welcome to 3rd Strike, {{username}}.</h1>
 			<h2>Still playing {% if character %}{{character}}{% else %}3rd Strike{% endif %}?</h2>
 		{% else %}

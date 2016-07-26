@@ -4,8 +4,7 @@ from app import config, models
 from app.models import *
 from datetime import timedelta
 import os
-
-regions = []
+gaming_places = {"Logan Arcade": "http://loganarcade.com", "Next Level Battle Lounge" : "dumm"}
 
 @app.route("/", methods=["GET", "POST"])
 def index():
@@ -23,11 +22,10 @@ def index():
 		session['username'] = name
 		session['character'] = character
 		session['region'] = form.region.data
-		regions.append(form.region.data)
-		print(regions)
-		return render_template("home.html", username=name, character=character)
+		
+		return render_template("home.html", username=name, character=character, locations=gaming_places)
 
-	return render_template("home.html", form=form)
+	return render_template("home.html", form=form, locations=gaming_places)
 
 @app.route("/agent")
 def browser_check():
@@ -36,25 +34,25 @@ def browser_check():
 
 @app.route('/<username>')
 def user_home(username=None, char=None):
-	return render_template("home.html", username=username, char=char)
+	return render_template("home.html", username=username, char=char, locations=gaming_places)
 
 @app.route('/rankings/<region>')
 def user_rankings(region):
-	return render_template("rankings.html", region=session.get(region, None))
+	return render_template("rankings.html", region=session.get(region, None), locations=gaming_places)
 
 @app.route('/rankings')
 def rankings():
 	if session.get('username', None):
 		if session.get('region', None):
-			return render_template("rankings.html", username=session['username'], region=session['region'])	
-		return render_template("rankings.html", username=session['username'])
-	return render_template("rankings.html")
+			return render_template("rankings.html", username=session['username'], region=session['region'], locations=gaming_places)
+		return render_template("rankings.html", username=session['username'], locations=gaming_places)
+	return render_template("rankings.html", locations=gaming_places)
 
 @app.route('/blog')
 def blog():
 	if session.get('region', None):
-		return render_template("blog.html", data="Here's a customized blog for {}".format(session['region']))
-	return render_template("blog.html", data="Non-region blog")
+		return render_template("blog.html", data="Here's a customized blog for {}".format(session['region']), locations=gaming_places)
+	return render_template("blog.html", data="Non-region blog", locations=gaming_places)
 @app.route('/submit-your-story')
 def blog_entry():
 	if session.get('username', None):
