@@ -1,0 +1,36 @@
+{% extends "base_template.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block content %}
+<div class="container">
+	{% block change_message %}
+	{% for message in get_flashed_messages() %}
+			<div class="alert alert-warning">
+				<button type="button" class="close" data-dismiss="alert"> &times;</button> 
+				{{message}}
+			</div>
+		{% endfor %}
+	{% endblock %}
+	<div class="page-header">
+
+		{% if username %}
+			<h1>Welcome to 3rd Strike, {{username}}.</h1>
+			<h2>Still playing {% if character %}{{character}}{% else %}3rd Strike{% endif %}?</h2>
+		{% else %}
+			<h1>Welcome to 3rd Strike</h1>
+		{% endif %}
+	</div>	
+</div>
+{% if form %}
+	<div class="container">
+		<form method="POST">
+		{{ wtf.quick_form(form) }}
+		</form>
+	 </div>
+{% else %}
+	<div class="container">
+		<h2>Blog posts</h2>
+	</div>
+ {% endif %}
+}
+{% endblock %}

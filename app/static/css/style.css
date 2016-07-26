@@ -1,0 +1,110 @@
+
+
+.banner {
+		background-image: url("/static/images/summer.jpg");
+		height: 500px;
+		margin-left: 9.5%;
+		height: 256px;
+		background-size: 100% 100%;
+		margin-top: -.85%;
+		background-repeat: no-repeat;
+	}
+.small { text-align: center;
+	font-size: 12px;
+	font-family: 'Shadows Into Light', cursive; }
+.nav_bar {
+	text-align: middle;
+	font-family: 'Shadows Into Light', cursive;
+	margin: 0;
+	margin-left: -.65%;
+	padding: 0;
+	width: 10%;
+	height: 100%;
+	background-color: #FFFFFF;
+	position: fixed;
+	overflow: auto;
+}
+	.nav_bar a {
+		text-align: center;
+		display: block;
+		font-size: 24px;
+		height: 50px;
+
+	}
+	.nav_bar a:hover {
+		font-weight: bold;
+	}
+	.nav_bar .active {
+		background-color: #B3DDF2;
+		color: #FF0000;
+		font-weight: bold;
+	}
+.main {
+	padding-left: 9%
+}
+h3 {
+	text-align: center;
+	font-size: 28px;
+	font-family: 'Shadows Into Light', cursive;
+}
+p {
+	text-align: center;
+	font-size: 12px;
+	font-family: Sans-serif;
+}
+.main table tr:hover {
+	font-weight: bold;
+}
+	.main .past {
+		color: red;
+	}
+	.main .next {
+		font-weight: bold;
+		color: green;
+	}
+	.main .major {
+		color: blue;
+	}
+	.main .schedule tr:hover {
+		font-weight: bold;
+	}
+a {
+	color: black;
+	text-decoration: none;
+}	
+.main header {
+	font-family: 'Shadows Into Light', cursive;
+	font-weight: bold;
+	font-size: 24px;
+}
+.main table {
+	border: 1px solid black;
+}
+.main th {
+	font-family: 'Shadows Into Light', cursive;
+	font-size: 24px;
+	border: 1px solid black;
+}
+.main td {
+	font-family: 'Shadows Into Light', cursive;
+	text-align: center;
+	border: 1px solid black;
+	letter-spacing: 4px;
+}
+.main .major td {
+	color: #FF9900;
+	font-weight: bold;
+}
+.main .results_table {
+
+}
+.main .footer {
+	font-family: 'Shadows Into Light', cursive;
+	letter-spacing: 1px;
+}
+.ranking_caption {
+text-align: middle;
+font-family: 'Shadows Into Light', cursive;
+font-weight: bold;
+font-size: 32px;
+}

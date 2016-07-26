@@ -1,0 +1,13 @@
+{% extends "base_template.html" %}
+{% block title %}Rankings{% endblock %}
+{% block content %}
+<div class="container">
+	<div class="page-header">
+		{% if username %}
+			<h1>{{username}} is ranked...</h1>
+		{% else %}
+			<h1>Leaderboard</h1>
+		{% endif %}
+	</div>
+</div>
+{% endblock %}
