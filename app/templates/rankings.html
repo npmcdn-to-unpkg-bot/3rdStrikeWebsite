@@ -13,14 +13,20 @@
 {% if region == "Chicago" %}
 <div class="container">
 	<ol>
+		<h3><strong>{{region}}</strong></h3>
+		<hr>
 		<li>Quentin</li>
 		<li>Adam</li>
 		<li>Kerry</li>
 	</ol>
 </div>
-{% else %}
+{% elif region %}
 	<ol>
+		<h3><strong>{{region}}</strong></h3>
+		<hr>
 		<li>Arbitrary Leaderboard</li>
 	</ol>
+{% else %}
+	<h4>This is where the rankings will go</h4>
 {% endif %}
 {% endblock %}

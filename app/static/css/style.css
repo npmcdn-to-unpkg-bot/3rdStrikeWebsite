@@ -14,13 +14,20 @@
 .social_media_bar {
 	position: fixed;
 	bottom: 0px;
+	/*height: 7%;*/
 	width: 100%;
 	background-color: black;
 }
 .social_media_bar p {
-	color: white;r
+	color: white;
 }
 
 .dropdown-toggle a{
 	color: black;
+}
+
+.img-circle {
+	border-radius: 50%;
+	/*height: 50%;*/
+	width: 30px;
 }

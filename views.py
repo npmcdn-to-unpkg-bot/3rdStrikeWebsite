@@ -4,7 +4,9 @@ from app import config, models
 from app.models import *
 from datetime import timedelta
 import os
-gaming_places = {"Logan Arcade": "http://loganarcade.com", "Next Level Battle Lounge" : "dumm"}
+gaming_places = {"Logan Arcade": "http://loganarcade.com", 
+"Next Level Battle Lounge" : "http://nycnextlevel.com",
+"Astro City Arcade" : "http://arcadeufo.com"}
 
 @app.route("/", methods=["GET", "POST"])
 def index():
@@ -12,7 +14,7 @@ def index():
 	if session.get('character') in ["Yun","Chun Li", "Ken"]:
 			flash("Tier Whore")
 	if session.get('character') =="Makoto":
-		flash("You're a f****** Psycho")
+		flash("You're a f****** Psycho Makoto player")
 	if form.validate_on_submit():
 
 		old_name = session.get('username')
@@ -36,10 +38,6 @@ def browser_check():
 def user_home(username=None, char=None):
 	return render_template("home.html", username=username, char=char, locations=gaming_places)
 
-@app.route('/rankings/<region>')
-def user_rankings(region):
-	return render_template("rankings.html", region=session.get(region, None), locations=gaming_places)
-
 @app.route('/rankings')
 def rankings():
 	if session.get('username', None):
@@ -53,14 +51,21 @@ def blog():
 	if session.get('region', None):
 		return render_template("blog.html", data="Here's a customized blog for {}".format(session['region']), locations=gaming_places)
 	return render_template("blog.html", data="Non-region blog", locations=gaming_places)
+
 @app.route('/submit-your-story')
 def blog_entry():
 	if session.get('username', None):
-		return "Okay"
+		return temp()
 	return "Jacked up"
+
 @app.route('/logout', methods=["GET", "POST"])
 def logout():
 	session.clear()
 	return redirect(url_for("index"))
+
+@app.route('/temp')
+def temp():
+
+	return "Go back, there's nothing here yet"
 
 

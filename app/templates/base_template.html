@@ -24,17 +24,17 @@
 					<li><a href="/">Home</a></li>
 					<li><a href="/blog">Blog</a></li>
 					<li><a href="/rankings">Rankings</a></li>
-					 <div class="dropdown">
-					  <a class="dropdown-toggle" data-toggle="dropdown">Places to Compete
-					  	<span class="caret"></span>
-					  </a>
-						  <ul class="dropdown-menu">
-						    {% for loc in locations %}
-							<li><a href={{locations.get(loc)}}>{{loc}}</a></li>
+					<li class="dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown">
+							Places to Compete
+							<span class="caret"></span>
+						</a>
+						<ul class="dropdown-menu">
+							{% for loc in locations %}
+								<li><a href={{locations.get(loc)}}>{{loc}}</a></li>
 							{% endfor %}
-						  </ul>
-					</div>
-
+						</ul>
+					</li>
 					<li><a href="https://docs.google.com/forms/d/1RA6xPIs6Uw-0MqSyzQ7el_oBSZ0Ypz9uXxc-HPp7Pwk/viewform">Feedback</a></li>
 					<li><a href="/donate">Donate</a></li>
 					{% if session['username'] %}
@@ -50,7 +50,9 @@
 	{% block socialism %}
 		<div class="social_media_bar">
 			<div class="container">
-				<p>Facebook, Twitter, Twitch links go here</p>
+				<!-- <p>Facebook, Twitter, Twitch links go here</p> -->
+				<a href="/temp"><img class="img-circle" src="/static/images/fb-logo.png"/></a>
+				<a href="/temp"><img class="img-circle" src="/static/images/twitter-logo.png"></a>
 			</div>
 		</div>
 	{% endblock %}
