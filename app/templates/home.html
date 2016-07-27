@@ -22,13 +22,39 @@
 </div>
 {% if form %}
 	<div class="container">
-		<form method="POST">
-		{{ wtf.quick_form(form) }}
+		<form action="/" method="POST">
+			{{ wtf.quick_form(form) }}
 		</form>
 	 </div>
 {% else %}
 	<div class="container">
 		<h2>Blog posts</h2>
+		{% if results %}
+			<div class="row">
+				<div class="col-xs-6">
+					<ul style="list-style-type: none;"">
+						<h4>Here's some people that compete near you</h4><hr>
+						{% for res in results.items %}
+							{% if res.userName != username %}
+								<li>{{ res.userName }}: {{res.city}}</li>
+							{% endif %}
+						{% endfor %}
+					</ul>
+				</div>
+				<div class="col-xs-6">
+					<ul style="list-style-type: none;"">
+						<h4>Here's some places to compete nearby</h4><hr>
+						<p><strong>Construction note: This currently returns the same thing as usernames nearby. <br>
+						I want it to return local arcades instead.</strong></p>
+						{% for res in results.items %}
+							{% if res.userName != username %}
+								<li>{{ res.userName }}, {{res.city}}</li>
+							{% endif %}
+						{% endfor %}
+					</ul>
+				</div>
+			</div>
+		{% endif %}
 	</div>
 {% endif %}
 

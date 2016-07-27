@@ -27,8 +27,12 @@
 						<a class="dropdown-toggle" data-toggle="dropdown" href="/rankings">Rankings
 						<span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							{% for loc in ["Atlanta", "Spain"] %}
-								<li><a href={{locations.get(loc)}}>{{loc}}</a></li>
+							{% for loc in geos %}
+								{% if loc == "Overall" %}
+								<li><a href="/rankings">Overall Rankings</a></li>
+								{% else %}
+								<li><a href=/rankings/{{loc}}>{{loc}}</a></li>
+								{% endif %}
 							{% endfor %}
 						</ul>
 					</li>

@@ -1,14 +1,22 @@
 from flask.ext.wtf import Form
-from wtforms import StringField, IntegerField, SelectField, SubmitField
+from datetime import date
+from wtforms import StringField, SelectField, SubmitField
+from flask.ext.admin.form.widgets import DatePickerWidget
+from wtforms.fields.html5 import DateField, EmailField
 from wtforms.validators import Required
-characters = ["", "Alex", "Akuma", "Chun Li", "Dudley", "Elena", "Hugo", "Ibuki", "Ken", 
-"Makoto", "Necro", "Oro", "Q", "Remy", "Ryu", "Sean", "Twelve", "Urien", "Yang", "Yun"]
+from app.lookUp import characters, city_dict
 
 class NameForm(Form):
-	name = StringField("What's your name?", validators=[Required()])
-	nickname = StringField("What's your handle/nickname?", validators=[Required()])
-	age = IntegerField("What's your age?")
+	firstName = StringField("First name", validators=[Required()])
+	lastName = StringField("Last name", validators=[Required()])
+	userName = StringField("Enter a Username", validators=[Required()])
+	birthdate = DateField('Birthdate', format="%m/%d/%Y", widget=DatePickerWidget())
+	email = EmailField("Email")
 	character = SelectField("Who's your favorite character?", coerce=str, 
 		choices = [(i,i) for n,i in enumerate(sorted(characters))])
-	region = StringField("Where are you from?", validators=[Required()])
+	city = SelectField("Where are you from?", coerce=str,
+		choices=[(i,i) for i in city_dict.keys()],
+		validators=[Required()], 
+		) #Requiring a region.
 	submit = SubmitField("Submit")
+

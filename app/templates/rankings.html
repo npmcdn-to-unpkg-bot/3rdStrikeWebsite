@@ -10,23 +10,38 @@
 		{% endif %}
 	</div>
 </div>
-{% if region == "Chicago" %}
 <div class="container">
+{% if region %}
 	<ol>
-		<h3><strong>{{region}}</strong></h3>
+		<h3 align="center"><strong>{{region}} Leaderboard</strong></h3>
 		<hr>
-		<li>Quentin</li>
-		<li>Adam</li>
-		<li>Kerry</li>
-	</ol>
-</div>
-{% elif region %}
-	<ol>
-		<h3><strong>{{region}}</strong></h3>
-		<hr>
-		<li>Arbitrary Leaderboard</li>
+		<div class="row">
+				<div class="col-xs-6" align="center">
+					<li>Me</li>
+					<li>You</li>
+				</div>
+				<div class="col-xs-6" align="center">
+					<li>Your momma</li>
+					<li>And your cousin too</li>
+				</div>
+			</div>
 	</ol>
 {% else %}
-	<h4>This is where the rankings will go</h4>
+	
+		<ol>
+			<h3 align="center"><strong>Overall Rankings</strong></h3>
+			<hr>
+			<div class="row">
+				<div class="col-xs-6" align="center">
+					<li>Me</li>
+					<li>You</li>
+				</div>
+				<div class="col-xs-6" align="center">
+					<li>Your momma</li>
+					<li>And your cousin too</li>
+				</div>
+			</div>
+		</ol>
 {% endif %}
+</div>
 {% endblock %}
