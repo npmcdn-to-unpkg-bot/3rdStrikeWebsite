@@ -42,9 +42,9 @@ def index():
 		session['username'] = name
 		session['character'] = character
 		# session['region'] = form.city.data
-		query = user.query.filter_by(region=city_dict[form.city.data]).paginate()
-
 		try:
+
+			query = user.query.filter_by(region=city_dict[form.city.data])
 			return render_template("home.html", username=name, character=character, results=query, locations=gaming_places, geos=geographies)
 		except InvalidRequestError:
 			return render_template("home.html", form=form, locations=gaming_places, geos=geographies)
