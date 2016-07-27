@@ -47,7 +47,7 @@ def index():
 			query = user.query.filter_by(region=city_dict[form.city.data])
 			query = Pagination(query, per_page=2)
 			return render_template("home.html", username=name, character=character, results=query, locations=gaming_places, geos=geographies)
-		except InvalidRequestError:
+		except (InvalidRequestError, TypeError):
 			return render_template("home.html", form=form, locations=gaming_places, geos=geographies)
 	
 	return render_template("home.html", form=form, locations=gaming_places, geos=geographies)
