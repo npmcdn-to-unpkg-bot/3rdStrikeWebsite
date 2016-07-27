@@ -34,22 +34,19 @@ def index():
 		except IntegrityError as dataTaken:
 			db.session.delete(newUser)
 			flash("Username or email already taken")
-			return render_template("home.html", form=form, locations=gaming_places, geos=geographies)
-
-		name, age, character = form.userName.data, form.birthdate.data, form.character.data
-
+			return render_template("home.html", form=form, locations=gaming_places, geos=geographies)		
 		
-		session['username'] = name
-		session['character'] = character
+		session['username'] =  form.userName.data
+		session['character'] = form.character.data
 		# session['region'] = form.city.data
 		try:
-
-			query = user.query.filter_by(region=city_dict[form.city.data])
-			query = Pagination(query, per_page=2)
-			return render_template("home.html", username=name, character=character, results=query, locations=gaming_places, geos=geographies)
+			query = user.query.filter_by(region=city_dict[form.city.data]).paginate()
+			return render_template("home.html", username=session['username'], character=session['character'], 
+				results=query, 
+				locations=gaming_places, geos=geographies)
 		except (InvalidRequestError, TypeError):
 			return render_template("home.html", form=form, locations=gaming_places, geos=geographies)
-	
+
 	return render_template("home.html", form=form, locations=gaming_places, geos=geographies)
 	
 
