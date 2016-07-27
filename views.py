@@ -42,7 +42,7 @@ def index():
 		session['username'] = name
 		session['character'] = character
 		# session['region'] = form.city.data
-		query = user.query.filter_by(region=city_dict[form.city.data]).paginate()
+		query = user.query.filter_by(region=city_dict[form.city.data]).paginate(2)
 
 		try:
 			return render_template("home.html", username=name, character=character, results=query, locations=gaming_places, geos=geographies)
