@@ -41,7 +41,7 @@ def index():
 		
 		session['username'] = name
 		session['character'] = character
-		session['region'] = form.city.data
+		# session['region'] = form.city.data
 		query = user.query.filter_by(region=city_dict[form.city.data]).paginate()
 
 		try:
@@ -71,8 +71,7 @@ def rankings():
 
 @app.route('/rankings/<region>')
 def region_rankings(region):
-	session['region'] = region
-	return render_template("rankings.html",region=session['region'], locations=gaming_places, geos=geographies)
+	return render_template("rankings.html",region=region, locations=gaming_places, geos=geographies)
 
 @app.route('/blog')
 def blog():
