@@ -6,7 +6,8 @@ characters = ["", "Alex", "Akuma", "Chun Li", "Dudley", "Elena", "Hugo", "Ibuki"
 
 class NameForm(Form):
 	name = StringField("What's your name?", validators=[Required()])
-	age = IntegerField("What's your age?")
+	nickname = StringField("What's your handle/nickname?")
+	# age = IntegerField("What's your age?")
 	character = SelectField("Who's your favorite character?", coerce=str, 
 		choices = [(i,i) for n,i in enumerate(sorted(characters))])
 	# city = 

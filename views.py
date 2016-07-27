@@ -20,7 +20,7 @@ def index():
 		old_name = session.get('username')
 		if old_name != None and old_name != form.name.data:
 			flash("Name updated")		
-		name, age, character = form.name.data, form.age.data, form.character.data
+		name, age, character = form.nickname.data, form.age.data, form.character.data
 		session['username'] = name
 		session['character'] = character
 		session['region'] = form.region.data
