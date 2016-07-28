@@ -74,7 +74,7 @@ def rankings():
 	if session.get('username', None):
 		blogQuery = blogPosts.query.filter_by(region=session['location']).paginate()
 		return render_template("rankings.html", username=session['username'], locations=gaming_places, geos=geographies)
-	blogQuery = blogPosts.query.all().paginate()
+	blogQuery = blogPosts.query.all()
 	return render_template("rankings.html", locations=gaming_places, geos=geographies)
 
 @application.route('/rankings/<region>')

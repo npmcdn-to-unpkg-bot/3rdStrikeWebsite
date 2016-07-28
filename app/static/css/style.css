@@ -12,7 +12,7 @@
 }
 
 .social_media_bar {
-	/*position: absolute;*/
+	position: fixed;
 	bottom: 0px;
 	/*height: 7%;*/
 	width: 100%;
