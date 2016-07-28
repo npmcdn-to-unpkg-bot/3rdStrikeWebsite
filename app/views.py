@@ -35,7 +35,7 @@ def index():
 			newUser.lastName = form.lastName.data
 			newUser.birthdate = form.birthdate.data
 			newUser.email = form.email.data
-			newUser.vgCharacter = form.character.datar
+			newUser.vgCharacter = form.character.data
 			newUser.city = form.city.data
 			newUser.region = city_dict[form.city.data]
 

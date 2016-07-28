@@ -13,7 +13,7 @@ class NameForm(Form):
 	lastName = StringField("Last name", validators=[Required()])
 	userName = StringField("Enter a Username", validators=[Required()])
 	password = StringField("Enter a passowrd", validators=[Required()])
-	birthdate = DateField('Birthdate', format="%m/%d/%Y", )
+	birthdate = DateField('Birthdate', format="%M/%d/%Y", )
 	email = EmailField("Email")
 	character = SelectField("Who's your favorite character?", coerce=str, 
 		choices = [(i,i) for n,i in enumerate(sorted(characters))])
