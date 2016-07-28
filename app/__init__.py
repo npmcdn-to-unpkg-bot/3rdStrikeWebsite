@@ -16,4 +16,4 @@ application.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 db = SQLAlchemy(application)
 db.create_all()
 
-import views
+from app import views
