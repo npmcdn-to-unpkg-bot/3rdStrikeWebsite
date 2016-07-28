@@ -18,12 +18,16 @@
 <div class="container" align="center">
 	<div class="row">
 		<div class="col-xs-12 blogposts">
+		{% if recent %}
 			<h3>{{ recent.title }}</h3>
 			<div class="container">
 				{% for line in recent.postText.split("\n") %}
 					<p align="left">{{ line }}</p>
 				{% endfor %}
 			</div>
+			{% else %}
+			<h3>Blogs</h3>
+			{% endif %}
 		</div>	
 	</div>
 </div>
