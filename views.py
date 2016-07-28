@@ -15,41 +15,36 @@ geographies = ["Overall"]+sorted(["Chicago","Atlanta", "New York City"])
 
 @app.route("/", methods=["GET", "POST"])
 def index():
+
 	form = NameForm()
-	if session.get('character') in ["Yun","Chun Li", "Ken"]:
-			flash("Tier Whore")
-	if session.get('character') =="Makoto":
-		flash("You're a f****** Psycho Makoto player")
+	try:
+		if session['userName']:
+			return render_template('home.html', form=None, username=session['userName'], locations=gaming_places, geos=geographies)
+	except KeyError: pass #It's okay. Working on repairing this.
 	if form.validate_on_submit():		
-		newUser = user()
-		newUser.firstName, newUser.lastName, newUser.userName,\
-		newUser.birthdate, newUser.email, newUser.character, newUser.city, newUser.region\
-		=\
-		form.firstName.data, form.lastName.data, form.userName.data,\
-		form.birthdate.data, form.email.data, form.character.data, form.city.data, city_dict[form.city.data]
-
-		try:
+		user_name = user.query.filter_by(userName=form.userName.data).first()
+		if user_name is None:
+			newUser = user()
+			newUser.firstName, newUser.lastName, newUser.userName,\
+			newUser.birthdate, newUser.email, newUser.character, newUser.city, newUser.region\
+			=\
+			form.firstName.data, form.lastName.data, form.userName.data,\
+			form.birthdate.data, form.email.data, form.character.data, form.city.data, city_dict[form.city.data]
 			db.session.add(newUser)
-			db.session.commit()
-		except IntegrityError as dataTaken:
-			db.session.delete(newUser)
+			try:
+				db.session.commit()
+			except:
+				flash("Welcome back {}".format(user_name))
+				return render_template("home.html", form=form, locations=gaming_places, geos=geographies)		
+			flash("Registered!")
+			session['known'] = True
+		else:
 			flash("Username or email already taken")
-			return render_template("home.html", form=form, locations=gaming_places, geos=geographies)		
-		
-		session['username'] =  form.userName.data
-		session['character'] = form.character.data
-		# session['region'] = form.city.data
-		try:
-			query = user.query.filter_by(region=city_dict[form.city.data]).paginate()
-			return render_template("home.html", username=session['username'], character=session['character'], 
-				results=query, 
-				locations=gaming_places, geos=geographies)
-		except (InvalidRequestError, TypeError):
-			return render_template("home.html", form=form, locations=gaming_places, geos=geographies)
-
+			session['known'] = False
+		session['userName'] = form.userName.data
+		return render_template('home.html', form=None, username=session['userName'], locations=gaming_places, geos=geographies)
 	return render_template("home.html", form=form, locations=gaming_places, geos=geographies)
 	
-
 @app.route("/agent")
 def browser_check():
 	user_agent = request.headers.get('User-Agent')
@@ -62,8 +57,6 @@ def user_home(username=None, char=None):
 @app.route('/rankings')
 def rankings():
 	if session.get('username', None):
-		# if session.get('region', None):
-		# 	return render_template("rankings.html", username=session['username'], region=session['region'], locations=gaming_places, geos=geographies)
 		return render_template("rankings.html", username=session['username'], locations=gaming_places, geos=geographies)
 	return render_template("rankings.html", locations=gaming_places, geos=geographies)
 
