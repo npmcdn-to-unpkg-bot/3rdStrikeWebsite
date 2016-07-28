@@ -7,6 +7,6 @@ try: data = pd.read_csv("3rd Strike/3rdStrikeWebsite/app/city-region.csv") #Pyth
 except: 
 	try: data = pd.read_csv("app/city-region.csv")
 	except: data = pd.read_csv("city-region.csv")
-
+# data = data.dropna()
 cities = data["City"]
 city_dict = {k:v for k, v in zip(data["City"], data["Region"])}
