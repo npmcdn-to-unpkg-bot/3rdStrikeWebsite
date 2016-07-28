@@ -18,8 +18,6 @@ geographies = ["Overall"]+sorted(["Chicago","Atlanta", "New York City"])
 @application.route("/", methods=["GET", "POST"])
 def index():
 	form = NameForm()
-	try: print(session['userName'])
-	except: print("No session")
 	try:
 		if session['userName']:
 			otherPlayers = user.query.filter_by(region=session['location']).paginate()
@@ -30,13 +28,17 @@ def index():
 		user_name = user.query.filter_by(userName=form.userName.data).first()
 		if user_name is None:
 			newUser = user()
-			newUser.firstName, newUser.lastName, newUser.userName,\
-			newUser.birthdate, newUser.email, newUser.vgCharacter,\
-			newUser.city, newUser.region, newUser.password\
-			=\
-			form.firstName.data, form.lastName.data, form.userName.data,\
-			form.birthdate.data, form.email.data, form.character.data,\
-			form.city.data, city_dict[form.city.data], form.password.data
+
+			newUser.userName = form.userName.data
+			newUser.password = form.password.data
+			newUser.firstName = form.firstName.data
+			newUser.lastName = form.lastName.data
+			newUser.birthdate = form.birthdate.data
+			newUser.email = form.email.data
+			newUser.vgCharacter = form.character.datar
+			newUser.city = form.city.data
+			newUser.region = city_dict[form.city.data]
+
 			db.session.add(newUser)
 			try:
 				db.session.commit()
@@ -51,11 +53,13 @@ def index():
 		session['userName'] = form.userName.data
 		session['city'] = form.city.data
 		session['location'] = city_dict[form.city.data]
+		session['region'] = city_dict[form.city.data]
 		otherPlayers = user.query.filter_by(region=session['location']).paginate()
 		return render_template('home.html', form=None, username=session['userName'], 
 			results=otherPlayers, locations=gaming_places, geos=geographies)
 	return render_template("home.html", form=form, locations=gaming_places, geos=geographies)
 	return '''Not working'''
+
 @application.route("/agent")
 def browser_check():
 	user_agent = request.headers.get('User-Agent')
@@ -68,18 +72,43 @@ def browser_check():
 @application.route('/rankings')
 def rankings():
 	if session.get('username', None):
+		blogQuery = blogPosts.query.filter_by(region=session['location']).paginate()
 		return render_template("rankings.html", username=session['username'], locations=gaming_places, geos=geographies)
+	blogQuery = blogPosts.query.all().paginate()
 	return render_template("rankings.html", locations=gaming_places, geos=geographies)
 
 @application.route('/rankings/<region>')
 def region_rankings(region):
 	return render_template("rankings.html",region=region, locations=gaming_places, geos=geographies)
 
-@application.route('/blog')
+@application.route('/blog', methods=["GET","POST"])
 def blog():
-	if session.get('region', None):
-		return render_template("blog.html", data="Here's a customized blog for {}".format(session['region']), locations=gaming_places, geos=geographies)
-	return render_template("blog.html", data="Non-region blog", locations=gaming_places, geos=geographies)
+	mostRecentBlog = blogPosts.query.all()[-1]
+	if session.get('region'):
+		blogForm = BlogForm()
+		if blogForm.validate_on_submit():
+			newBlogPost = blogPosts()
+			newBlogPost.title = blogForm.title.data
+			newBlogPost.postText = blogForm.body.data
+			newBlogPost.region = session.get('region')
+			newBlogPost.date = datetime.now()
+
+			db.session.add(newBlogPost)
+			try:
+				db.session.commit()
+				flash("Blog posted!")
+				return render_template("blog.html", form=blogForm, recent=mostRecentBlog, blogData=posts,
+					locations=gaming_places, geos=geographies)				
+			except:
+				flash("Failed to post plog... Sry, my bad.")
+
+		posts = blogPosts.query.filter_by(region=session.get('region')).paginate().items[:-1]
+
+		return render_template("blog.html", form=blogForm, recent=mostRecentBlog, blogData=posts,
+			locations=gaming_places, geos=geographies)
+	posts = blogPosts.query.paginate().items[:-1]
+	return render_template("blog.html", recent=mostRecentBlog, blogData=posts, 
+		locations=gaming_places, geos=geographies)
 
 @application.route('/submit-your-story')
 def blog_entry():

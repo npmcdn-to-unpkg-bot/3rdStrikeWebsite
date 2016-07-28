@@ -1,31 +1,65 @@
 {% extends "base_template.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
 
 {% block content %}
-{% if data %}
-	<div class="container">
-		<h2>{{data}}</h2>
-	</div>
-{% endif %}
+{% block change_message %}
+{% for message in get_flashed_messages() %}
+		<div class="alert alert-warning">
+			<button type="button" class="close" data-dismiss="alert"> &times;</button> 
+			{{message}}
+		</div>
+	{% endfor %}
+{% endblock %}
+<div class="container">
+<h2>{{ session.get('region', "General") }} Blog</h2>
+</div>
+<hr>
+
 <div class="container" align="center">
 	<div class="row">
-		<div class="col-xs-12">This can serve as a banner/main article page</div>
+		<div class="col-xs-12 blogposts">
+			<h3>{{ recent.title }}</h3>
+			<div class="container">
+				{% for line in recent.postText.split("\n") %}
+					<p align="left">{{ line }}</p>
+				{% endfor %}
+			</div>
+		</div>	
 	</div>
 </div>
-<br> <br>
+<hr>
+
 <div class="container" align="center">
-	<div class="row">
-		<div class="col-xs-6">Here's some blog content.
-		How many lines can it take?</div>
-		<div class="col-xs-6">Here also is some blog content. Well, that's interesting. It seems very lorem like</div>
-	</div>
+	{% for post in blogData %}
+		<div class="row">
+			<div class="col-xs-12 blogposts">
+				<h3>{{ post.title }}</h3>
+				<!-- <p>{{ post.date.month, post.date.day, post.date.year }}</p> -->
+				<div class="container" align="left">
+					{% for line in post.postText.split("\n") %}
+						<p>{{ line }}</p>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	{% endfor %}
 </div>
 <br>
-<div class="container" align="center">
-	<div class="row">
-		<div class="col-xs-6">Here's some blog content.
-		How many lines can it take?</div>
-		<div class="col-xs-6">Here also is some blog content. Well, that's interesting. It seems very lorem like</div>
-	</div>
-</div>
+{% if form %}
+	<div class="container">
+		<form action="/blog" method="POST" type="text" onkeypress="return dontSubmit(event);">
+			{{ wtf.quick_form(form) }}
+			<!-- <dl>
+				<dt>Title:</dt>
+				<dd>{{ form.title }}</dd>
+				<dt>Post: </dt>
+				<dd>{{ form.body(cols="100", rows="10") }}</dd>
+			</dl>
+			{{ form.submit }} -->
+		</form>
+	 </div>
+{% endif %}
 
+<script type="text/javascript" src="static/jsUtils/utils.js">
+</script>
 {% endblock %}

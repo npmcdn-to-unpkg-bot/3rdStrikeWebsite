@@ -9,5 +9,5 @@ from datetime import datetime
 
 if __name__ == '__main__':
 	# migrate = Migrate(application, db)
-
+	db.create_all()
 	application.run(debug=True)

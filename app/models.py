@@ -1,8 +1,8 @@
 from flask_wtf import Form
 from run import db
 from datetime import date
-from wtforms import StringField, SelectField, SubmitField, HiddenField, validators
-from flask.ext.admin.form.widgets import DatePickerWidget
+from wtforms import StringField, SelectField, SubmitField, TextField, validators
+from wtforms.widgets import TextArea
 from wtforms.fields.html5 import DateField, EmailField
 from wtforms.validators import Required
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -48,3 +48,19 @@ class user(db.Model):
 
 	def verify_password(self, password):
 		return check_password_hash(self.password_hash, password)
+
+class BlogForm(Form):
+	"""docstring for BlogForm"""
+	title = StringField("Title", validators=[Required()])
+	body = StringField("Submit a blog post", validators=[Required()], widget=TextArea())
+	submit = SubmitField("Submit")
+
+		
+
+class blogPosts(db.Model):
+	"""docstring for blogPosts(db.model"""
+	id = db.Column(db.Integer, primary_key=True)
+	title = db.Column(db.String(64), unique=True, nullable=False)
+	postText = db.Column(db.Text(), unique=True, nullable=False)
+	region = db.Column(db.String(64), unique=False, nullable=False)
+	date = db.Column(db.DATE(), unique=False, nullable=False, index=True)

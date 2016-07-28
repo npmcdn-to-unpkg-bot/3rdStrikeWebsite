@@ -32,7 +32,9 @@
 			<div class="row">
 				<div class="col-xs-6">
 					<ul style="list-style-type: none;"">
-						<h3><strong>Nearby Competition</strong></h3><hr>
+						<h3 align="center"><strong>Nearby Competition</strong></h3>
+						 <!-- style="background-color: red;" -->
+						<hr>
 						{% if results.items|length > 1 %}
 							{% for res in results.items %}
 								{% if res.userName != username %}
@@ -46,12 +48,13 @@
 				</div>
 				<div class="col-xs-6">
 					<ul style="list-style-type: none;"">
-						<h3><strong>Battlegrounds</strong></h3><hr>
-						<p><strong>Construction note: This currently returns the same thing as usernames nearby. <br>
+						<h3 align="center"><strong>Battlegrounds</strong></h3><hr>
+						<p><strong>Construction note: This currently returns the same thing as usernames nearby.
+						<br>
 						I want it to return local arcades instead.</strong></p>
 						{% for res in results.items %}
 							{% if res.userName != username %}
-								<li>{{ res.userName }}, {{res.city}}</li>
+								<li><strong>{{ res.userName }}:</strong> {{res.city}}</li>
 							{% endif %}
 						{% endfor %}
 					</ul>
