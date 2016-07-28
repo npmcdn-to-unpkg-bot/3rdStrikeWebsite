@@ -1,7 +1,7 @@
 from flask import Flask, request, render_template, session, redirect, url_for, flash
 from flask.ext.sqlalchemy import Pagination
 from sqlalchemy.exc import IntegrityError, InvalidRequestError
-from run import application, db
+from run import app, db
 from app import config, models
 from app.models import *
 from datetime import timedelta, datetime
@@ -15,7 +15,7 @@ gaming_places = {"Logan Arcade": "http://loganarcade.com",
 geographies = ["Overall"]+sorted(["Chicago","Atlanta", "New York City"])
 
 
-@application.route("/", methods=["GET", "POST"])
+@app.route("/", methods=["GET", "POST"])
 def index():
 	form = NameForm()
 	try: print(session['userName'])
@@ -56,43 +56,43 @@ def index():
 			results=otherPlayers, locations=gaming_places, geos=geographies)
 	return render_template("home.html", form=form, locations=gaming_places, geos=geographies)
 	return '''Not working'''
-@application.route("/agent")
+@app.route("/agent")
 def browser_check():
 	user_agent = request.headers.get('User-Agent')
 	return "<p>Your browser is {}</p>".format(user_agent)
 
-# @application.route('/<username>')
+# @app.route('/<username>')
 # def user_home(username=None, char=None):
 # 	return render_template("home.html", username=username, char=char, locations=gaming_places, geos=geographies)
 
-@application.route('/rankings')
+@app.route('/rankings')
 def rankings():
 	if session.get('username', None):
 		return render_template("rankings.html", username=session['username'], locations=gaming_places, geos=geographies)
 	return render_template("rankings.html", locations=gaming_places, geos=geographies)
 
-@application.route('/rankings/<region>')
+@app.route('/rankings/<region>')
 def region_rankings(region):
 	return render_template("rankings.html",region=region, locations=gaming_places, geos=geographies)
 
-@application.route('/blog')
+@app.route('/blog')
 def blog():
 	if session.get('region', None):
 		return render_template("blog.html", data="Here's a customized blog for {}".format(session['region']), locations=gaming_places, geos=geographies)
 	return render_template("blog.html", data="Non-region blog", locations=gaming_places, geos=geographies)
 
-@application.route('/submit-your-story')
+@app.route('/submit-your-story')
 def blog_entry():
 	if session.get('username', None):
 		return temp()
 	return "Jacked up"
 
-@application.route('/logout', methods=["GET", "POST"])
+@app.route('/logout', methods=["GET", "POST"])
 def logout():
 	session.clear()
 	return redirect(url_for("index"))
 
-@application.route('/temp')
+@app.route('/temp')
 def temp():
 
 	return "Go back, there's nothing here yet"

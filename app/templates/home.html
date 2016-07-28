@@ -28,22 +28,25 @@
 	 </div>
 {% else %}
 	<div class="container">
-		<h2>Blog posts</h2>
 		{% if results %}
 			<div class="row">
 				<div class="col-xs-6">
 					<ul style="list-style-type: none;"">
-						<h4>Here's some people that compete near you</h4><hr>
-						{% for res in results.items %}
-							{% if res.userName != username %}
-								<li>{{ res.userName }}: {{res.city}}</li>
-							{% endif %}
-						{% endfor %}
+						<h3><strong>Nearby Competition</strong></h3><hr>
+						{% if results.items|length > 1 %}
+							{% for res in results.items %}
+								{% if res.userName != username %}
+									<li><strong>{{ res.userName }}:</strong> {{res.city}}</li>
+								{% endif %}
+							{% endfor %}
+						{% else %}
+							<h3>Dang, nobody plays around {{ session['location'] }}</h3>
+						{% endif %}
 					</ul>
 				</div>
 				<div class="col-xs-6">
 					<ul style="list-style-type: none;"">
-						<h4>Here's some places to compete nearby</h4><hr>
+						<h3><strong>Battlegrounds</strong></h3><hr>
 						<p><strong>Construction note: This currently returns the same thing as usernames nearby. <br>
 						I want it to return local arcades instead.</strong></p>
 						{% for res in results.items %}
