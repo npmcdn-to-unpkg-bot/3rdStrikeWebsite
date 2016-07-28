@@ -13,7 +13,7 @@ class NameForm(Form):
 	lastName = StringField("Last name", validators=[Required()])
 	userName = StringField("Enter a Username", validators=[Required()])
 	password = StringField("Enter a passowrd", validators=[Required()])
-	birthdate = DateField('Birthdate')
+	# birthdate = DateField('Birthdate')
 	email = EmailField("Email")
 	character = SelectField("Who's your favorite character?", coerce=str, 
 		choices = [(i,i) for n,i in enumerate(sorted(characters))])
@@ -32,7 +32,7 @@ class user(db.Model):
 	lastName = db.Column(db.String(64), unique=False, nullable=True)
 	userName = db.Column(db.String(64), unique=True, index=True, nullable=False)
 	password_hash = db.Column(db.String(128), unique=False, index=False, nullable=False)
-	birthdate = db.Column(db.DATE(), unique=False, nullable=True)
+	# birthdate = db.Column(db.DATE(), unique=False, nullable=True)
 	email = db.Column(db.String(64), unique=True, nullable=True)
 	vgCharacter = db.Column(db.String(64), unique=False, nullable=True)
 	city = db.Column(db.String(64), unique=False, nullable=True)

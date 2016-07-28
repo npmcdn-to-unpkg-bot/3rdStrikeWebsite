@@ -11,8 +11,8 @@ import os
 gaming_places = {"Logan Arcade": "http://loganarcade.com", 
 "Next Level Battle Lounge" : "http://nycnextlevel.com",
 "Astro City Arcade" : "http://arcadeufo.com"}
-
-geographies = ["Overall"]+sorted(["Chicago","Atlanta", "New York City"])
+allRegions = user.query.all()
+geographies = ["Overall"]+sorted(list(set([i.city for i in allRegions])))
 
 
 @application.route("/", methods=["GET", "POST"])
@@ -33,7 +33,7 @@ def index():
 			newUser.password = form.password.data
 			newUser.firstName = form.firstName.data
 			newUser.lastName = form.lastName.data
-			newUser.birthdate = form.birthdate.data
+			# newUser.birthdate = form.birthdate.data
 			newUser.email = form.email.data
 			newUser.vgCharacter = form.character.data
 			newUser.city = form.city.data

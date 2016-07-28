@@ -1,46 +1,46 @@
 {% extends "base_template.html" %}
 {% block title %}Rankings{% endblock %}
 {% block content %}
-<div class="container">
-	<div class="page-header">
-		{% if username %}
-			<h1>Check your rankings among some of the best</h1>
-		{% else %}
-			<h1>Leaderboard</h1>
-		{% endif %}
+	<div class="container">
+		<div class="page-header">
+			{% if username %}
+				<h1>Check your rankings among some of the best</h1>
+			{% else %}
+				<h1>Leaderboard</h1>
+			{% endif %}
+		</div>
 	</div>
-</div>
-<div class="container">
-{% if region %}
-	<ol>
-		<h3 align="center"><strong>{{ region }} Leaderboard</strong></h3>
-		<hr>
-		<div class="row">
-				<div class="col-xs-6" align="center">
-					<li>Me</li>
-					<li>You</li>
-				</div>
-				<div class="col-xs-6" align="center">
-					<li>Your momma</li>
-					<li>And your cousin too</li>
-				</div>
-			</div>
-	</ol>
-{% else %}
+	<div class="container">
+	{% if region %}
 		<ol>
-			<h3 align="center"><strong>Overall Rankings</strong></h3>
+			<h3 align="center"><strong>{{ region }} Leaderboard</strong></h3>
 			<hr>
 			<div class="row">
-				<div class="col-xs-6" align="center">
-					<li>Me</li>
-					<li>You</li>
+					<div class="col-xs-6" align="center">
+						<li>Me</li>
+						<li>You</li>
+					</div>
+					<div class="col-xs-6" align="center">
+						<li>Your momma</li>
+						<li>And your cousin too</li>
+					</div>
 				</div>
-				<div class="col-xs-6" align="center">
-					<li>Your momma</li>
-					<li>And your cousin too</li>
-				</div>
-			</div>
 		</ol>
-{% endif %}
-</div>
+	{% else %}
+			<ol>
+				<h3 align="center"><strong>Overall Rankings</strong></h3>
+				<hr>
+				<div class="row">
+					<div class="col-xs-6" align="center">
+						<li>Me</li>
+						<li>You</li>
+					</div>
+					<div class="col-xs-6" align="center">
+						<li>Your momma</li>
+						<li>And your cousin too</li>
+					</div>
+				</div>
+			</ol>
+	{% endif %}
+	</div>
 {% endblock %}
