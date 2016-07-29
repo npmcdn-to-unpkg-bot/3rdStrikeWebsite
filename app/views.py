@@ -43,9 +43,10 @@ def index():
 			try:
 				db.session.commit()
 			except (InvalidRequestError, IntegrityError):
-				db.session.delete(newUser)
 				flash("Welcome back {}".format(user_name))
+				db.session.delete(newUser)
 				return render_template("home.html", form=form, locations=gaming_places, geos=geographies)		
+			db.session.delete(newUser)
 			flash("Registered!")
 			session['known'] = True
 		else:
