@@ -17,7 +17,6 @@ locData, streamData, blogQuery = Locations.query.all(), \
 
 @application.context_processor
 def inject_locations():
-	session.clear()
 	return dict(locations=locData,
 		geos=geographies,
 		streams=streamData,
