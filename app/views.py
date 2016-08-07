@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, redirect, url_for, flash
+from flask import Flask, session, request, render_template, redirect, url_for, flash
 from flask.ext.sqlalchemy import Pagination
 from sqlalchemy.exc import IntegrityError, InvalidRequestError
 from run import application, db
