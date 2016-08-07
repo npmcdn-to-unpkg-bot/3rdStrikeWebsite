@@ -27,7 +27,7 @@ def inject_locations():
 
 @application.route("/")
 def index():
-	session.clear()
+	session['name'] = live
 	return render_template("home.html")
 
 @application.route('/rankings')
