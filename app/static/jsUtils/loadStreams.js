@@ -18,12 +18,11 @@ for (var i = 0; i < links.length; i++) {
 			});
 		}(channels[i]));
 		
-		
-		
 		mainDiv.appendChild(element);
-		element.onclick = (function(opt) {
+		element.onclick = (function(link, chat) {
 			return function() {
-				document.getElementById("video").src = opt;
+				document.getElementById("video").src = link;
+				document.getElementById("vidChat").src = chat;
 			}
-		})(links[i]);
+		})(links[i], chats[i]);
 	}
