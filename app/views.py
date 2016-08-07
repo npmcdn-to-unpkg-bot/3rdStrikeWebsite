@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, session, redirect, url_for, flash
+from flask import Flask, request, render_template, redirect, url_for, flash
 from flask.ext.sqlalchemy import Pagination
 from sqlalchemy.exc import IntegrityError, InvalidRequestError
 from run import application, db
@@ -14,7 +14,7 @@ geographies = ["Overall"]
 geographies += sorted(list(set([i.city for i in user.query.all()])))
 locData, streamData, blogQuery = Locations.query.all(), \
 	Streams.query.all(), blogPosts.query.all()
-
+# print(session)
 @application.context_processor
 def inject_locations():
 	return dict(locations=locData,
@@ -27,7 +27,6 @@ def inject_locations():
 
 @application.route("/")
 def index():
-	session['name'] = live
 	return render_template("home.html")
 
 @application.route('/rankings')
