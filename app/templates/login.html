@@ -1,0 +1,11 @@
+{% import "bootstrap/wtf.html" as wtf %}
+{% extends "base_template.html" %}
+{% block content %}
+{% if form %}
+	<div class="container">
+		<form action="/login" method="POST">
+			{{ wtf.quick_form(form) }}
+		</form>
+	 </div>
+{% endif %}
+{% endblock %}

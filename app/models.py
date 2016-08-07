@@ -9,11 +9,12 @@ from wtforms.validators import Required
 from werkzeug.security import generate_password_hash, check_password_hash
 from app.lookUp import characters, city_dict
 cities = sorted([i for i in city_dict.keys()])
+
 class NameForm(Form):
 	firstName = StringField("First name", validators=[Required()])
 	lastName = StringField("Last name", validators=[Required()])
 	userName = StringField("Enter a Username", validators=[Required()])
-	password = StringField("Enter a passowrd", validators=[Required()])
+	password = StringField("Enter a password", validators=[Required()])
 	# birthdate = DateField('Birthdate')
 	email = EmailField("Email")
 	character = SelectField("Who's your favorite character?", coerce=str, 
@@ -23,6 +24,44 @@ class NameForm(Form):
 		validators=[Required()], 
 		) #Requiring a region.
 	submit = SubmitField("Submit")
+
+class LoginForm(Form):
+	userName = StringField("Username", validators=[Required()])
+	password = StringField("Password", validators=[Required()])
+	submit = SubmitField("Submit")
+
+class Locations(db.Model):
+	'''Hello world'''
+	__tablename__ = 'Locations'
+	id = db.Column(db.Integer, primary_key=True)
+	Name = db.Column(db.String(64))
+	Address = db.Column(db.String(64))
+	City = db.Column(db.String(64))
+	State = db.Column(db.String(64))
+	Country = db.Column(db.String(64))
+	Lat = db.Column(db.Float())
+	Lon = db.Column(db.Float())
+	url = db.Column(db.String(64))
+class Streams(db.Model):
+	__tablename__ = 'streams'
+	id = db.Column(db.Integer, primary_key=True)
+	name = db.Column(db.String(64))
+	link = db.Column(db.String(64))
+	chats = db.Column(db.String(64))
+
+class Events(db.Model):
+	'''Hello world'''
+	__tablename__ = 'events'
+	id = db.Column(db.Integer, primary_key=True)
+	Name = db.Column(db.String(64))
+	Price = db.Column(db.Float())
+	City = db.Column(db.String(64))
+	State = db.Column(db.String(64))
+	Country = db.Column(db.String(64))
+	Lat = db.Column(db.Float())
+	Lon = db.Column(db.Float())
+	url = db.Column(db.String(64))
+
 
 
 class user(db.Model):

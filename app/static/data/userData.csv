@@ -1,0 +1,4 @@
+id,firstName,lastName,userName,password_hash,email,vgCharacter,city,region
+1,Quentin,Holness,qholness,pbkdf2:sha1:1000$TfciX0oc$2cee6472284ee07571df17811a7797d60abf5432,qholness@gmail.com,Makoto,Chicago,Midwest
+2,Simon,Yoo,yooster,pbkdf2:sha1:1000$TwuYbyMF$48fde98069d34daa084d0e24d95c5d8c21957dd2,yooster@gmail.com,Ken,Omaha,Midwest
+3,lyda,brown,mimster,pbkdf2:sha1:1000$ZeKG1533$37962460322ec218f048575e5da0c54ec6bea933,mimster29@gmail.com,Chun Li,Chicago,Midwest

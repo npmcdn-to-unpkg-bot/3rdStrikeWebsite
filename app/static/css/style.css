@@ -1,8 +1,6 @@
 .navbar, .navbar-collapse{
-	background-color: #CD6839;
-	/*outline-color: #CD6839;*/
+	background-color: black;
 	background-image: none;
-	/*height: 60px;*/
 }
 .navbar-nav a{
 	color: red;

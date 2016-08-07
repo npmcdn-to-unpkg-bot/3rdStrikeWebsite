@@ -3,70 +3,38 @@
 
 {% block content %}
 	<div class="container">
-		{% block change_message %}
-		{% for message in get_flashed_messages() %}
-				<div class="alert alert-warning">
-					<button type="button" class="close" data-dismiss="alert"> &times;</button> 
-					{{message}}
-				</div>
-			{% endfor %}
-		{% endblock %}
+		<div class="alert alert-warning">
+			<button type="button" class="close" data-dismiss="alert"> &times;</button> 
+			Welcome to the world of Street Fighter 3
+		</div>
 		<div class="page-header">
-			{% if username and username != None %}
-				<h1>Welcome to 3rd Strike, {{username}}.</h1>
-				<h2>Still playing {% if character %}{{character}}{% else %}3rd Strike{% endif %}?</h2>
-			{% else %}
-				<h1>Welcome to 3rd Strike</h1>
-			{% endif %}
+			<h1>Welcome to 3rd Strike</h1>
 		</div>	
 	</div>
-	{% if form %}
-		<div class="container">
-			<form action="/" method="POST">
-				{{ wtf.quick_form(form) }}
-			</form>
-		 </div>
-	{% else %}
-		<div class="container">
-			{% if results %}
-				<div class="row">
-					<div class="col-xs-6">
-						<ul style="list-style-type: none;"">
-							<h3 align="center"><strong>Nearby Competition</strong></h3>
-							 <!-- style="background-color: red;" -->
-							<hr>
-							{% if results.items|length > 1 %}
-								{% for res in results.items %}
-									{% if res.userName != username %}
-										<li><strong>{{ res.userName }}:</strong> {{res.city}}</li>
-									{% endif %}
-								{% endfor %}
-							{% else %}
-								<h3>Dang, nobody plays around {{ session['location'] }}</h3>
-							{% endif %}
-						</ul>
-					</div>
-					<div class="col-xs-6">
-						<ul style="list-style-type: none;"">
-							<h3 align="center"><strong>Battlegrounds</strong></h3><hr>
-							<p><strong>Construction note: This currently returns the same thing as usernames nearby.
-							<br>
-							I want it to return local arcades instead.</strong></p>
-							{% for res in results.items %}
-								{% if res.userName != username %}
-									<li><strong>{{ res.userName }}:</strong> {{res.city}}</li>
-								{% endif %}
-							{% endfor %}
-						</ul>
-					</div>
-				</div>
-			{% endif %}
+	<hr>
+	<div class="container">
+		<div class="col-xs-7" id="chiBanner">
+			<iframe id="video" src="https://player.twitch.tv/?channel=drpancakejdmba"frameborder="0" scrolling="no" height="500px" width="620px"></iframe>
 		</div>
-	{% endif %}
-	<!-- <div class="social_media_bar">
-		<div class="container">
-			<a href="/temp"><img class="img-circle" src="/static/images/fb-logo.png"/></a>
-			<a href="/temp"><img class="img-circle" src="/static/images/twitter-logo.png"></a>
+		<div class="col-xs-5">
+			<iframe id="vidChat" frameborder="0" scrolling="no" src="http://twitch.tv/drpancakejdmba/chat?popout=" height="500" width="350">
+		    </iframe>
 		</div>
-	</div> -->
+		<hr>
+		<div class="btn-group col-xs-7"id="linkHolder">
+		</div>
+		<div class="col-xs-5">
+			<span style="font-family: Impact; font-size:24px;">Status:</span>
+			<span style="color: red; font-family: Impact; font-size:24px;">Online</span>
+			<span style="color: blue; font-family: Impact; font-size:24px;">Offline</span>
+		</div>
+	</div>
+	<script type="text/javascript" src="static/jsUtils/streamData.js"></script>
+	<script type="text/javascript" src="static/jsUtils/loadStreams.js">
+	</script>
+	<style type="text/css">
+		.vidLinks:hover {
+			color: red;
+		}
+	</style>
 {% endblock %}
