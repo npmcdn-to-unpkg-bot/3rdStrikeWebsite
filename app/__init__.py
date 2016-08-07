@@ -12,10 +12,12 @@ application.config.from_object(config)
 application.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.sqlite'
 application.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
 application.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
-application.config['expire_on_commit'] = False
 application.config['NO_BACKSLASH_ESCAPES'] = True
 
-db = SQLAlchemy(application)
+db = SQLAlchemy(application, 
+	session_options{
+		'expire_on_commit' : False,
+	})
 
 db.create_all()
 
