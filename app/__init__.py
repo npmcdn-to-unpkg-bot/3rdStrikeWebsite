@@ -15,7 +15,7 @@ application.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 application.config['NO_BACKSLASH_ESCAPES'] = True
 
 db = SQLAlchemy(application, 
-	session_options{
+	session_options={
 		'expire_on_commit' : False,
 	})
 
