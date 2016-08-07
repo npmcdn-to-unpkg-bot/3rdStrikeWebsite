@@ -8,23 +8,38 @@ for (var i = 0; i < links.length; i++) {
 	element.style.fontFamily = "Impact";
 	element.style.letterSpacing = ".5px";
 
-	$(document).ready(function(streamer){
+	$(document).ready(function(streamer, link){
 		$.getJSON(twitchUrl+streamer+twitchEnd, function(data){
 			if (data && data.stream) {
+				document.getElementById('video').src=link;
 				document.getElementById(streamer).style.color = "red";
 			}
 			else {
 				document.getElementById(streamer).style.color = "black";
 			}
 		});
-	}(channels[i]));
+	}(channels[i], link=links[i]));
 	
 	
 	mainDiv.appendChild(element);
-	element.onclick = (function(link, chat) {
+	element.onclick = (function(link, chat, channelID) {
 		return function() {
-			document.getElementById("video").src = link;
-			document.getElementById("vidChat").src = chat;
+			var channel = document.getElementById(channelID);
+			var videoDiv = document.getElementById("video");
+			var chatWindow = document.getElementById("vidChat");
+			if (videoDiv.src != link) {
+				// return other ids to black
+				for (var i = 0; i < channels.length; i++) {
+					i = i.toString();
+					if (document.getElementById(channels[i]).style.color != 'red'){ 
+						document.getElementById(channels[i]).style.color = "black";
+					}
+				}
+				channel.style.color = "blue";
+			}
+			// channel.style.color = "blue";
+			videoDiv.src = link;
+			chatWindow.src = chat;
 		}
-	})(links[i], chats[i]);
+	})(links[i], chats[i], channels[i]);
 }

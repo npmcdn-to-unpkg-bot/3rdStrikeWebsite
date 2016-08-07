@@ -9,22 +9,21 @@ import os
 
 
 
-LIVE = True #Don't forget to turn me on when you're ready to launch
-if LIVE:
-	geographies = ["Overall"]
-	geographies += sorted(list(set([i.city for i in user.query.all()])))
-	locData, streamData, blogQuery = Locations.query.all(), \
-		Streams.query.all(), blogPosts.query.all()
+LIVE = False #Don't forget to turn me on when you're ready to launch
+geographies = ["Overall"]
+geographies += sorted(list(set([i.city for i in user.query.all()])))
+locData, streamData, blogQuery = Locations.query.all(), \
+	Streams.query.all(), blogPosts.query.all()
 
 
-	@application.context_processor
-	def inject_locations():
-		return dict(locations=locData,
-			geos=geographies,
-			streams=streamData,
-			jinjaLocData=locData,
-			live=LIVE,
-			)
+@application.context_processor
+def inject_locations():
+	return dict(locations=locData,
+		geos=geographies,
+		streams=streamData,
+		jinjaLocData=locData,
+		live=LIVE,
+		)
 
 
 @application.route("/")
