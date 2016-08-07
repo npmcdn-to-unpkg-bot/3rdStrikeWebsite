@@ -28,7 +28,7 @@ def inject_locations():
 
 @application.route("/")
 def index():
-	session.expunge(streamData)
+	session.expunge_all()
 	return render_template("home.html")
 
 @application.route('/rankings')
