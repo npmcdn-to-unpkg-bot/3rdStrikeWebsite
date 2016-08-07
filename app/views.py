@@ -13,7 +13,7 @@ LIVE = False #Don't forget to turn me on when you're ready to launch
 geographies = ["Overall"]
 geographies += sorted(list(set([i.city for i in user.query.all()])))
 locData, streamData, blogQuery = Locations.query.all(), \
-	list(Streams.query.all()), blogPosts.query.all()
+	Streams.query.all(), blogPosts.query.all()
 
 
 @application.context_processor
@@ -28,6 +28,7 @@ def inject_locations():
 
 @application.route("/")
 def index():
+	session.clear()
 	return render_template("home.html")
 
 @application.route('/rankings')
