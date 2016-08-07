@@ -14,9 +14,10 @@ geographies = ["Overall"]
 geographies += sorted(list(set([i.city for i in user.query.all()])))
 locData, streamData, blogQuery = Locations.query.all(), \
 	Streams.query.all(), blogPosts.query.all()
-# print(session)
+
 @application.context_processor
 def inject_locations():
+	session.clear()
 	return dict(locations=locData,
 		geos=geographies,
 		streams=streamData,
