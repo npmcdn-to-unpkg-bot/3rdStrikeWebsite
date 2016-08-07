@@ -4,21 +4,57 @@ from sqlalchemy.exc import IntegrityError, InvalidRequestError
 from run import application, db
 from app import config, models
 from app.models import *
-from datetime import timedelta, datetime
+# from datetime import timedelta, datetime
 import os
 
 
-allRegions = user.query.all()
-geographies = ["Overall"]+sorted(list(set([i.city for i in allRegions])))
 
-locData = Locations.query.all()
-gaming_places = {k.Name: k.url for k in locData}
-nameAddress_dict = {k.Name : [k.Lat, k.Lon] for k in locData}
+LIVE = True #Don't forget to turn me on when you're ready to launch
+if LIVE:
+	geographies = ["Overall"]
+	geographies += sorted(list(set([i.city for i in user.query.all()])))
+	locData, streamData, blogQuery = Locations.query.all(), \
+		Streams.query.all(), blogPosts.query.all()
+
+
+	@application.context_processor
+	def inject_locations():
+		return dict(locations=locData,
+			geos=geographies,
+			streams=streamData,
+			jinjaLocData=locData,
+			live=LIVE,
+			)
+
 
 @application.route("/")
 def index():
-	return render_template("home.html", 
-		locations=gaming_places, geos=geographies)
+	return render_template("home.html")
+
+@application.route('/rankings')
+def rankings():
+	return render_template("rankings.html")
+
+@application.route('/blog', methods=["GET","POST"])
+def blog():
+	mostRecentBlog = blogQuery[-1]
+	posts = blogQuery[:-1]
+	return render_template("blog.html", 
+		recent=mostRecentBlog, 
+		blogData=posts
+		)
+
+
+@application.route('/blog/<article>')
+def blogReader():
+	post = blogPosts.query.filter_by(title=article)[0]
+	return render_template("blogPage.html", 
+		articleName=article,
+		postText=post.postText)
+
+@application.route("/challenge")
+def challengePage():
+	return render_template("challengePage.html")
 
 @application.route("/login", methods=["GET", "POST"])
 def login():
@@ -73,19 +109,17 @@ def login():
 
 @application.route("/register", methods=["GET", "POST"])
 def register():
-	form = NameForm()
-	if form.validate_on_submit():
+	registerForm = NameForm()
+	# if registerForm.validate_on_submit():
 		# Check if username or email in database
-		checkName = form.userName
+		# checkName = registerForm.userName
 		# if 
 			# Alert if username or email taken
 		# if not, add to db session and push to db
 		# then push to main page w/ session
-	return render_template("register.html", form=form, 
-		locations=nameAddress_dict,
-		keyItems = tuple(i for i in nameAddress_dict.keys())
+	return render_template("register.html", 
+		form=registerForm, 
 		)
-
 
 
 @application.route("/agent")
@@ -93,51 +127,10 @@ def browser_check():
 	user_agent = request.headers.get('User-Agent')
 	return "<p>Your browser is {}</p>".format(user_agent)
 
-@application.route('/rankings')
-def rankings():
-	if session.get('username', None):
-		blogQuery = blogPosts.query.filter_by(region=session['location']).paginate()
-		return render_template("rankings.html", username=session['username'], locations=gaming_places, geos=geographies)
-	blogQuery = blogPosts.query.all()
-	return render_template("rankings.html", locations=gaming_places, geos=geographies)
 
 @application.route('/rankings/<region>')
 def region_rankings(region):
-	return render_template("rankings.html",region=region, locations=gaming_places, geos=geographies)
-
-@application.route('/blog', methods=["GET","POST"])
-def blog():
-	mostRecentBlog = blogPosts.query.all()[-1]
-	if session.get('region'):
-		blogForm = BlogForm()
-		if blogForm.validate_on_submit():
-			newBlogPost = blogPosts()
-			newBlogPost.title = blogForm.title.data
-			newBlogPost.postText = blogForm.body.data
-			newBlogPost.region = session.get('region')
-			newBlogPost.date = datetime.now()
-
-			db.session.add(newBlogPost)
-			try:
-				db.session.commit()
-				flash("Blog posted!")
-				return render_template("blog.html", form=blogForm, recent=mostRecentBlog, blogData=posts,
-					locations=gaming_places, geos=geographies)				
-			except:
-				flash("Failed to post plog... Sry, my bad.")
-
-		posts = blogPosts.query.filter_by(region=session.get('region')).paginate().items[:-1]
-
-		return render_template("blog.html", form=blogForm, recent=mostRecentBlog, blogData=posts,
-			locations=gaming_places, geos=geographies)
-	posts = blogPosts.query.paginate().items[:-1]
-	return render_template("blog.html", recent=mostRecentBlog, blogData=posts, 
-		locations=gaming_places, geos=geographies)
-
-@application.route('/blog/<article>')
-def blogReader(article):
-	post = blogPosts.query.filter_by(title=article)[0]
-	return render_template("blogPage.html", articleName=article, postText=post.postText)
+	return render_template("rankings.html",region=region)
 
 
 @application.route('/submit-your-story')
@@ -150,10 +143,3 @@ def blog_entry():
 def logout():
 	session.clear()
 	return redirect(url_for("index"))
-
-@application.route('/temp')
-def temp():
-
-	return "Go back, there's nothing here yet"
-
-

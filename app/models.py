@@ -15,7 +15,6 @@ class NameForm(Form):
 	lastName = StringField("Last name", validators=[Required()])
 	userName = StringField("Enter a Username", validators=[Required()])
 	password = StringField("Enter a password", validators=[Required()])
-	# birthdate = DateField('Birthdate')
 	email = EmailField("Email")
 	character = SelectField("Who's your favorite character?", coerce=str, 
 		choices = [(i,i) for n,i in enumerate(sorted(characters))])
@@ -42,12 +41,14 @@ class Locations(db.Model):
 	Lat = db.Column(db.Float())
 	Lon = db.Column(db.Float())
 	url = db.Column(db.String(64))
+
 class Streams(db.Model):
 	__tablename__ = 'streams'
 	id = db.Column(db.Integer, primary_key=True)
-	name = db.Column(db.String(64))
+	cleanName = db.Column(db.String(64))
 	link = db.Column(db.String(64))
 	chats = db.Column(db.String(64))
+	channelName = db.Column(db.String(64))
 
 class Events(db.Model):
 	'''Hello world'''
@@ -72,7 +73,6 @@ class user(db.Model):
 	lastName = db.Column(db.String(64), unique=False, nullable=True)
 	userName = db.Column(db.String(64), unique=True, index=True, nullable=False)
 	password_hash = db.Column(db.String(128), unique=False, index=False, nullable=False)
-	# birthdate = db.Column(db.DATE(), unique=False, nullable=True)
 	email = db.Column(db.String(64), unique=True, nullable=True)
 	vgCharacter = db.Column(db.String(64), unique=False, nullable=True)
 	city = db.Column(db.String(64), unique=False, nullable=True)
@@ -88,6 +88,33 @@ class user(db.Model):
 
 	def verify_password(self, password):
 		return check_password_hash(self.password_hash, password)
+
+
+class matchLog(db.Model):
+	'''Hello world'''
+	__tablename__ = 'matchLog'
+	id = db.Column(db.Integer, primary_key=True)
+	p1 = db.Column(db.String(64))
+	p2 = db.Column(db.String(64))
+	char1 = db.Column(db.String(64))
+	char2 = db.Column(db.String(64))
+	eventID = db.Column(db.Integer)
+	winnerID = db.Column(db.Integer)
+
+class playerDB(db.Model):
+	'''Hello world'''
+	__tablename__ = 'playerDB'
+	id = db.Column(db.Integer, primary_key=True)
+	firstName = db.Column(db.String(64), unique=False, nullable=True)
+	lastName = db.Column(db.String(64), unique=False, nullable=True)
+	alias = db.Column(db.String(64), unique=True, index=True, nullable=False)
+	# password_hash = db.Column(db.String(128), unique=False, index=False, nullable=False)
+	email = db.Column(db.String(64), unique=True, nullable=True)
+	# vgCharacter = db.Column(db.String(64), unique=False, nullable=True)
+	city = db.Column(db.String(64), unique=False, nullable=True)
+	# region = db.Column(db.String(64), unique=False, nullable=False)
+
+
 
 class BlogForm(Form):
 	"""docstring for BlogForm"""

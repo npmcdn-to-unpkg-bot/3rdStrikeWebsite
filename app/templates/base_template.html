@@ -1,14 +1,22 @@
 {% extends "bootstrap/base.html" %}
 {% block title %}Hit Points{% endblock %}
 {% block navbar %}
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="icon" href="/static/images/mak_icon.png" style="border-radius: 50%;"/>
+
 	<link rel="stylesheet" type="text/css" href="/static/css/style.css"/>
+	
+	<!-- Leaflet -->
 	<link rel="stylesheet" href="https://npmcdn.com/leaflet@0.7.7/dist/leaflet.css" />
-<script src="https://npmcdn.com/leaflet@0.7.7/dist/leaflet.js"></script>
-	<link rel="icon" href="/static/images/mak_icon.png"/>
+	<script src="https://npmcdn.com/leaflet@0.7.7/dist/leaflet.js"></script>
+	
+	<!-- Jquery -->
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
 	<div class="navbar navbar-inverse" role="navigation" align="center">
 		<div class="container">
+		<!-- Navigation Bar -->
 			<div class="navbar-header"> 	
 				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
 					<span class="sr-only">Toggle Navigation</span>
@@ -18,48 +26,64 @@
 				</button>
 				<a class="navbar-brand" href="/">3rd Strike <strong>Hit Points</strong></a>
 			</div>
-
+			<!-- Collapsable Navbar -->
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
 					<li><a href="/">Home</a></li>
-					<li><a href="/blog">Blog</a></li>
-					<li class="dropdown"> <!-- Rankings -->
-						<a class="dropdown-toggle" data-toggle="dropdown" href="">
-						Rankings
-						<span class="caret"></span></a>
-						<ul class="dropdown-menu"> 
-							{% for loc in geos %}
-								{% if loc == "Overall" %}
-								<li><a href="/rankings">Overall Rankings</a></li>
-								{% else %}
-								<li><a href="/rankings/{{ loc }}">{{loc}}</a></li>
-								{% endif %}
-							{% endfor %}
-						</ul>
-					</li>
-					<li class="dropdown"> <!-- Gaming Locations -->
-						<a class="dropdown-toggle" data-toggle="dropdown" href="">
-							Locales
-							<span class="caret"></span>
-						</a>
-						<ul class="dropdown-menu">
-							{% for loc in locations %}
-								<li><a href={{locations.get(loc)}}>{{loc}}</a></li>
-							{% endfor %}
-						</ul>
-					</li>
-					<!-- <li><a href="/challenge">Challenge</a></li> -->
-					<li><a href="https://docs.google.com/forms/d/1RA6xPIs6Uw-0MqSyzQ7el_oBSZ0Ypz9uXxc-HPp7Pwk/viewform">Feedback</a></li>
-					<li><a href="/donate">Donate</a></li>
-					{% if session['userName'] %}
-						<li><a href="/logout">Logout</a></li>
+					{% if live %}
+						<li><a href="/blog">Blog</a></li>
+						<!-- // Rankings -->
+						<li class="dropdown">
+							<a class="dropdown-toggle" data-toggle="dropdown" href="">
+							Rankings
+							<span class="caret"></span></a>
+							<ul class="dropdown-menu"> 
+								{% for loc in geos %}
+									{% if loc == "Overall" %}
+									<li>
+										<a href="/rankings">Overall Rankings</a>
+									</li>
+									{% else %}
+									<li>
+										<a href="/rankings/{{ loc }}">{{loc}}</a>
+									</li>
+									{% endif %}
+								{% endfor %}
+							</ul>
+						</li>
+						<!-- // Gaming Locations -->
+						<li class="dropdown"> 
+							<a class="dropdown-toggle" data-toggle="dropdown" href="">
+								Locales
+								<span class="caret"></span>
+							</a>
+							<ul class="dropdown-menu">
+								{% for loc in locations %}
+									<li>
+										<a href={{loc.url}}>{{loc.Name}}</a>
+									</li>
+								{% endfor %}
+							</ul>
+						</li>
+						<!-- <li></li> -->
+						<li>
+							<a href="https://docs.google.com/forms/d/1RA6xPIs6Uw-0MqSyzQ7el_oBSZ0Ypz9uXxc-HPp7Pwk/viewform">Feedback</a>
+						</li>
+						<li><a href="/donate">Donate</a></li>
+						{% if session['userName'] %}
+							<li><a href="/logout">Logout</a></li>
+						{% else %}
+							<li><a href="/login">Login</a></li>
+							<li><a href="/register">Register</a></li>
+						{% endif %}
 					{% else %}
-						<li><a href="/login">Login</a></li>
-						<li><a href="/register">Register</a></li>
+						<li>
+							<a href="http://tehurn.com/gayweed" target="_">LegalizeIt</a>
+						</li>
 					{% endif %}
-
 				</ul>
 			</div>
 		</div>
 	</div>
+<a href="/challenge">Challenge</a>
 {% endblock %}

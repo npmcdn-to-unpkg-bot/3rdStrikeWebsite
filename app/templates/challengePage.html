@@ -1,0 +1,111 @@
+<title>Challenge!</title>
+{% extends "base_template.html" %}
+{% block content %}
+	<link rel="stylesheet" type="text/css" href="static/css/challenge.css">
+	<!-- Big Four Divs -->
+	<div class="rankings">
+
+		<div id="bigFour">
+			<h3 align="center">Logan's Best</h3><hr>	
+			<table border="1" align="center">
+				<tr>	
+					<td>S++</td>
+					<td>S+</td>
+					<td>S</td>
+					<td>A++</td>
+				</tr>
+				<tr>	
+					<td id="First"></td>
+					<td id="Second"></td>
+					<td id="Third"></td>
+					<td id="Fourth"></td>
+				</tr>
+			</table>
+		</div>
+		<br>	
+		<!-- A-tier -->
+		<div id="TryHards">
+			<h3 align="center">Logan's A-Tier</h3><hr>	
+			<table border="1">
+				<tr>
+					<td><strong>A-Team</strong></td>
+					<td><strong>B-Team</strong></td>
+					<td><strong>C-Team</strong></td>
+				</tr>
+				<tr>
+					<td id="Fifth"></td>
+					<td id="Eigth"></td>
+					<td id="Eleventh"></td>
+				</tr>
+				<tr>	
+					<td id="Sixth"></td>
+					<td id="Ninth"></td>
+					<td id="Twelveth"></td>
+				</tr>
+				<tr>	
+					<td id="Seventh"></td>			
+					<td id="Tenth"></td>
+					<td id="Thirteenth"></td>
+				</tr>
+			</table>
+		</div>
+		<br>	
+		<!-- B-Tier -->
+		<div id="DieHards">
+			<h3 align="center">Logan's B-Tier</h3><hr>	
+			<table border="1">
+				<tr>
+					<td><strong>A-Team</strong></td>
+					<td><strong>B-Team</strong></td>
+					<td><strong>C-Team</strong></td>
+					<td><strong>D-Team</strong></td>
+					<!-- <td><strong>E-Team</strong></td> -->
+				</tr>
+				<tr>
+					<td id="Fourteenth"></td>
+					<td id="Eighteenth"></td>
+					<td id="TwentyTwo"></td>
+					<td id="TwentySix"></td>
+					<!-- <td id="Thirty"></td> -->
+				</tr>
+				<tr>	
+					<td id="Fifteenth"></td>
+					<td id="Nineteenth"></td>
+					<td id="TwentyThree"></td>
+					<td id="TwentySeven"></td>
+					<!-- <td id="ThirtyOne"></td> -->
+				</tr>
+				<tr>	
+					<td id="Sixteenth"></td>
+					<td id="Twenty"></td>
+					<td id="TwentyFour"></td>
+					<td id="TwentyEight"></td>
+					<!-- <td id="ThirtyTwo"></td> -->
+				</tr>
+				<tr>
+					<td id="Seventeenth"></td>
+					<td id="TwentyOne"></td>
+					<td id="TwentyFive"></td>
+					<td id="TwentyNine"></td>
+					<!-- <td id="ThirtyThree"></td> -->
+				</tr>
+			</table>
+		</div>
+	</div>
+	<!-- Fight Cards -->
+	<div class="FightCard">
+			<select id="rivalSelector">
+			</select>
+			<button onclick="promptFighters(rivalSelector.value);">Challenge!</button>
+			<div id="FightCard1"></div>
+			<!-- <div class="FightCard2">Stuff</div> -->
+	</div>
+	
+</body>
+<script type="text/javascript" src="static/jsUtils/modules.js">
+
+</script>
+<script type="text/javascript" src="static/jsUtils/pageLoad.js">
+	</script>
+
+{% endblock %}

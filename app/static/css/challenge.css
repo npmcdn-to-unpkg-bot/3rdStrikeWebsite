@@ -1,0 +1,50 @@
+.main {
+	font-family: Arial;
+	letter-spacing: .5px;
+}
+.banner {
+	background-image: url("ChiStrikePoster.jpg");
+	background-size: 100%;
+	background-repeat: no-repeat;
+	width: 100%;
+	position: relative;
+}
+.rankings {
+	padding: 10% 5%;
+	position: absolute;
+	width: 	30%;
+}
+#First, #Second, #Third, #Fourth {
+	color: 	red;
+	letter-spacing: .5px;
+	
+}
+
+#bigFour, #TryHards, #DieHards{
+	align-content: 	center;
+	width: 150%;
+}
+.FightCard {
+	padding: 10% 0% 0% 55%;
+	position: absolute;
+	/*border: 1px solid black;*/
+
+}
+/*.FightCard1	{
+	font-family: Impact;
+	padding-top: 	39.5%;
+	padding-left: 	53.5%;
+	position: 	absolute;
+}
+.FightCard2	{
+	font-family: Impact;
+	padding-top: 	42.5%;
+	padding-left: 	53.5%;
+	position: 	absolute;
+}
+.FightCard3	{
+	font-family: Impact;
+	padding-top: 	42.5%;
+	padding-left: 	53.5%;
+	position: 	absolute;
+}*/
