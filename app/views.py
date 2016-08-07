@@ -15,7 +15,6 @@ geographies += sorted(list(set([i.city for i in user.query.all()])))
 locData, streamData, blogQuery = Locations.query.all(), \
 	Streams.query.all(), blogPosts.query.all()
 
-
 @application.context_processor
 def inject_locations():
 	return dict(locations=locData,
@@ -28,7 +27,7 @@ def inject_locations():
 
 @application.route("/")
 def index():
-	session.flush()
+	session.clear()
 	return render_template("home.html")
 
 @application.route('/rankings')
