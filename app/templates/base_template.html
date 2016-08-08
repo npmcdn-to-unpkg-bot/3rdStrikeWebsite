@@ -13,7 +13,6 @@
 	
 	<!-- Jquery -->
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-
 	<div class="navbar navbar-inverse" role="navigation" align="center">
 		<div class="container">
 		<!-- Navigation Bar -->
@@ -29,7 +28,7 @@
 			<!-- Collapsable Navbar -->
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
-					<li><a href="/">Home</a></li>
+					<li><a href="/" style="font-family: impact;">Home</a></li>
 					{% if live %}
 						<li><a href="/blog">Blog</a></li>
 						<!-- // Rankings -->
@@ -65,11 +64,6 @@
 								{% endfor %}
 							</ul>
 						</li>
-						<!-- <li></li> -->
-						<li>
-							<a href="https://docs.google.com/forms/d/1RA6xPIs6Uw-0MqSyzQ7el_oBSZ0Ypz9uXxc-HPp7Pwk/viewform">Feedback</a>
-						</li>
-						<li><a href="/donate">Donate</a></li>
 						{% if session['userName'] %}
 							<li><a href="/logout">Logout</a></li>
 						{% else %}

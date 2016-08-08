@@ -1,6 +1,12 @@
-.navbar, .navbar-collapse{
-	background-color: black;
-	background-image: none;
+.navbar-collapse{
+	/*background-image: url("/static/images/ChiStrikePoster.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;*/
+	font-family: Impact;
+	font-style: italic;
+	letter-spacing: .25px;
+}
+.navbar-collapse {
 }
 .navbar-nav a{
 	color: red;

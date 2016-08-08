@@ -8,7 +8,10 @@ from wtforms.fields.html5 import DateField, EmailField
 from wtforms.validators import Required
 from werkzeug.security import generate_password_hash, check_password_hash
 from app.lookUp import characters, city_dict
+
+
 cities = sorted([i for i in city_dict.keys()])
+
 
 class NameForm(Form):
 	firstName = StringField("First name", validators=[Required()])
@@ -24,10 +27,18 @@ class NameForm(Form):
 		) #Requiring a region.
 	submit = SubmitField("Submit")
 
+
 class LoginForm(Form):
 	userName = StringField("Username", validators=[Required()])
 	password = StringField("Password", validators=[Required()])
 	submit = SubmitField("Submit")
+
+class BlogForm(Form):
+	"""docstring for BlogForm"""
+	title = StringField("Title", validators=[Required()])
+	body = StringField("Submit a blog post", validators=[Required()], widget=TextArea())
+	submit = SubmitField("Submit")
+
 
 class Locations(db.Model):
 	'''Hello world'''
@@ -42,6 +53,7 @@ class Locations(db.Model):
 	Lon = db.Column(db.Float())
 	url = db.Column(db.String(64))
 
+
 class Streams(db.Model):
 	__tablename__ = 'streams'
 	id = db.Column(db.Integer, primary_key=True)
@@ -49,6 +61,7 @@ class Streams(db.Model):
 	link = db.Column(db.String(64))
 	chats = db.Column(db.String(64))
 	channelName = db.Column(db.String(64))
+
 
 class Events(db.Model):
 	'''Hello world'''
@@ -62,7 +75,6 @@ class Events(db.Model):
 	Lat = db.Column(db.Float())
 	Lon = db.Column(db.Float())
 	url = db.Column(db.String(64))
-
 
 
 class user(db.Model):
@@ -101,6 +113,7 @@ class matchLog(db.Model):
 	eventID = db.Column(db.Integer)
 	winnerID = db.Column(db.Integer)
 
+
 class playerDB(db.Model):
 	'''Hello world'''
 	__tablename__ = 'playerDB'
@@ -109,20 +122,11 @@ class playerDB(db.Model):
 	lastName = db.Column(db.String(64), unique=False, nullable=True)
 	alias = db.Column(db.String(64), unique=True, index=True, nullable=False)
 	# password_hash = db.Column(db.String(128), unique=False, index=False, nullable=False)
-	email = db.Column(db.String(64), unique=True, nullable=True)
+	# email = db.Column(db.String(64), unique=True, nullable=True)
 	# vgCharacter = db.Column(db.String(64), unique=False, nullable=True)
 	city = db.Column(db.String(64), unique=False, nullable=True)
-	# region = db.Column(db.String(64), unique=False, nullable=False)
+	state = db.Column(db.String(64), unique=False, nullable=False)
 
-
-
-class BlogForm(Form):
-	"""docstring for BlogForm"""
-	title = StringField("Title", validators=[Required()])
-	body = StringField("Submit a blog post", validators=[Required()], widget=TextArea())
-	submit = SubmitField("Submit")
-
-		
 
 class blogPosts(db.Model):
 	"""docstring for blogPosts(db.model"""
