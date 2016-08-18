@@ -8,11 +8,13 @@ import os
 
 
 
-LIVE = True #Don't forget to turn me on when you're ready to launch
+LIVE = False #Don't forget to turn me on when you're ready to launch
 geographies = ["Overall"]
 geographies += sorted(list(set([i.city for i in user.query.all()])))
-locData, streamData = Locations.query.all(), Streams.query.all()
-blogQuery, playerData = blogPosts.query.all(), playerDB.query.all()
+locData = Locations.query.all()
+streamData = Streams.query.all()
+blogQuery = blogPosts.query.all()
+playerData = playerDB.query.all()
 
 @application.context_processor
 def inject_locations():
@@ -26,6 +28,8 @@ def inject_locations():
 
 @application.route("/")
 def index():
+	'''main page'''
+	session.clear()
 	return render_template("home.html")
 
 @application.route('/rankings')
