@@ -1,0 +1,12 @@
+3S Website to-do:
+  Build and enable login page:
+    ☐ Mock-up HTMLs
+    ☐ Link class to HTML
+    ☐ Link form to DB
+    ☐ Get user login
+    ☐ Build password checker
+  Build blog posting page:
+    ☐ Use blog form
+    ☐ Create temp database for unapproved blogs
+    ☐ Send to temp database for review
+    ☐ 
