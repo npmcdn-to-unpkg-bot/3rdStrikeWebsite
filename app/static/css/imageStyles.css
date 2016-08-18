@@ -7,6 +7,16 @@
 .summerJam {
 	height: 75%;
 	width: 75%;
+	-webkit-transition: width 1s, height 1s;
+	transition: width 1s, height 1s;
+	border-radius: 25%;
+}
+.summerJam:hover {
+	height: 360px;
+	width: 480px;
+	z-index: 1;
+	position: relative;
+	/*-webkit-transition: width 2s;*/
 	border-radius: 10%;
 }
 .nec {
