@@ -8,17 +8,18 @@ for (var i = 0; i < links.length; i++) {
 	element.style.fontFamily = "Impact";
 	element.style.letterSpacing = ".5px";
 
-	$(document).ready(function(streamer, link){
+	$(document).ready(function(streamer, link, chatLink){
 		$.getJSON(twitchUrl+streamer+twitchEnd, function(data){
 			if (data && data.stream) {
 				document.getElementById('video').src=link;
+				document.getElementById('vidChat').src=chatLink;
 				document.getElementById(streamer).style.color = "red";
 			}
 			else {
 				document.getElementById(streamer).style.color = "black";
 			}
 		});
-	}(channels[i], link=links[i]));
+	}(channels[i], link=links[i], chatLink=chats[i]));
 	
 	
 	mainDiv.appendChild(element);
@@ -37,7 +38,6 @@ for (var i = 0; i < links.length; i++) {
 				}
 				channel.style.color = "blue";
 			}
-			// channel.style.color = "blue";
 			videoDiv.src = link;
 			chatWindow.src = chat;
 		}

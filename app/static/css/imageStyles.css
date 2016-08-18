@@ -1,26 +1,16 @@
-.LogansImage {
-	height: 75%; 
-	width: 75%;
-	padding-left: 10%;
-	border-radius: 10%;
-}
-.summerJam {
+.LogansImage, .summerJam, .nec, .tfc{
 	height: 75%;
 	width: 75%;
-	-webkit-transition: width 1s, height 1s;
-	transition: width 1s, height 1s;
-	border-radius: 25%;
+	-webkit-transition: width .25s, height .25s;
+	transition: width .25s, height .25s;
+	border-radius: 10%;
+	position: static;
 }
-.summerJam:hover {
+.summerJam:hover, .nec:hover , .tfc:hover{
 	height: 360px;
 	width: 480px;
 	z-index: 1;
-	position: relative;
-	/*-webkit-transition: width 2s;*/
+	position: absolute;
 	border-radius: 10%;
-}
-.nec {
-	height: 75%;
-	width: 75%;
-	border-radius: 10%;
+	margin-left: 25%;
 }
