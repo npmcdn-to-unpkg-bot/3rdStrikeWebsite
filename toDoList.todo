@@ -10,3 +10,9 @@
     ☐ Create temp database for unapproved blogs
     ☐ Send to temp database for review
     ☐ 
+  Plan events banner/side bar JS and Database:
+    ☐ Create database containing event data (image src, link, class, id)
+    ☐ Add query to views
+    ☐ Add to injector
+    ☐ Write JS to push images to image sidebar/banner
+    ☐ Test Driven?

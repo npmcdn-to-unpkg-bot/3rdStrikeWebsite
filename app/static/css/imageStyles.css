@@ -9,7 +9,8 @@
 	width: 75%;
 	border-radius: 10%;
 }
-.main {
-	background-image: url("static/images/Chars/Chun.jpg");
-	background-size: contain;
+.nec {
+	height: 75%;
+	width: 75%;
+	border-radius: 10%;
 }

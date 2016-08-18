@@ -6,16 +6,29 @@
 <div class="container row">
 	<!-- Image links(?) -->
 	<div class="col-xs-2">
-		<img 
+		<a target="_" href="https://www.facebook.com/LoganHardwareArcade/?fref=ts"><img 
 			class="LogansImage" id="LogansImage"
 			onmouseover="zoomImage('LogansImage')"
 			onmouseleave="reduceImage('LogansImage')" 
 			src="static/images/LoganArcade.png"/>
-		<img 
-			id="summerJam" class="summerJam" 
-			onmouseover="zoomImage('summerJam')"
-			onmouseleave="reduceImage('summerJam')" 
-			src="static/images/events/summerJam.jpg"/>
+		</a>
+		<br><br>
+		<a target="_" href="https://www.facebook.com/events/1577090665943008/">
+			<img 
+				id="summerJam" class="summerJam" 
+				onmouseover="zoomImage('summerJam')"
+				onmouseleave="reduceImage('summerJam')" 
+				src="static/images/events/summerJam.jpg"/>
+		</a>
+		<br><br>
+		<a target="_" href="https://www.facebook.com/Thisis3rdStrike/photos/gm.157089474724514/1286095068128863/?type=3&theater">
+			<img 
+				id="nec" class="nec" 
+				onmouseover="zoomImage('nec')"
+				onmouseleave="reduceImage('nec')" 
+				src="static/images/events/nec.jpg"/>
+		</a>
+		<br><br>
 	</div>
 	<!-- Title -->
 	<div class="col-xs-10">
@@ -69,16 +82,19 @@
 <script type="text/javascript">
 	function zoomImage(img) {
 		var image = document.getElementById(img);
-		image.style.height = "240px"
-		image.style.width = "360px";
+		image.style.height = "360px"
+		image.style.width = "480px";
 		image.style.position = "relative";
+		image.style.left = "0px";
+		image.style.top = "0px";
 		image.style.zIndex = "1";
+		image.style.paddingLeft = "5px";
 	}
 	function reduceImage(img) {
 		var image = document.getElementById(img);
 		image.style.height = "75%";
 		image.style.width = "75%"
-		image.style.position = "none";
+		// image.style.position = "relative";
 		image.style.zIndex = "0";
 	}
 </script>
