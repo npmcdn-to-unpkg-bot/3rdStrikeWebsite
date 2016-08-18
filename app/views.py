@@ -10,7 +10,12 @@ import os
 
 LIVE = False #Don't forget to turn me on when you're ready to launch
 geographies = ["Overall"]
-geographies += sorted(list(set([i.city for i in user.query.all()])))
+geographies += sorted(
+	list(
+		set(
+			[i.city for i in user.query.all()])
+		)
+	)
 locData = Locations.query.all()
 streamData = Streams.query.all()
 blogQuery = blogPosts.query.all()

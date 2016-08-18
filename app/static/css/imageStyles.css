@@ -1,0 +1,15 @@
+.LogansImage {
+	height: 75%; 
+	width: 75%;
+	padding-left: 10%;
+	border-radius: 10%;
+}
+.summerJam {
+	height: 75%;
+	width: 75%;
+	border-radius: 10%;
+}
+.main {
+	background-image: url("static/images/Chars/Chun.jpg");
+	background-size: contain;
+}
