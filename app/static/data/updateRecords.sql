@@ -1,6 +1,7 @@
 DROP TABLE IF EXISTS  `record`;
 DROP TABLE IF EXISTS  `winRecord`;
 DROP TABLE IF EXISTS  `lossRecord`;
+
 CREATE TABLE `winRecord` AS
    SELECT
 	matches.winnerID as playerID, 
@@ -29,4 +30,3 @@ CREATE TABLE `record` AS
    
 DROP TABLE `winRecord`;
 DROP TABLE `lossRecord`;
-
