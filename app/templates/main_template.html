@@ -1,0 +1,48 @@
+{% extends "bootstrap/base.html" %}
+{% block title %}Hit Points{% endblock %}
+{% block navbar %}
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="icon" href="/static/images/mak_icon.png" style="border-radius: 50%;"/>
+	<link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet"> 
+	<!-- Style sheets -->
+	<link rel="stylesheet" type="text/css" href="/static/css/style.css"/>
+	<!-- <link rel="stylesheet" type="text/css" href="static/css/imageStyles.css"> -->
+	<!-- Leaflet -->
+	<link rel="stylesheet" href="https://npmcdn.com/leaflet@0.7.7/dist/leaflet.css" />
+	<script src="https://npmcdn.com/leaflet@0.7.7/dist/leaflet.js"></script>
+	
+	<!-- Jquery -->
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+
+	<!-- Navigation Bar -->
+	<div class="navbar navbar-inverse" role="navigation" align="center">
+		<div class="container">
+			<div class="navbar-header"> 	
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+					<span class="sr-only">Toggle Navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="/">
+					<span id="HitPoint"><strong>Hit Points</strong>
+					</span>
+				</a>
+			</div>
+			<!-- Collapsable Navbar -->
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<li><a href="/">News</a></li>
+					<li><a href="Blog">Columns</a></li>
+					<li><a href="/StreamPage">Streams</a></li>
+					<!-- <li>Events</li>
+					<li>Links</li>
+					<li>About</li> -->
+				</ul>
+			</div>
+		</div>
+	</div>
+<!-- <a href="/challenge">Challenge</a> -->
+{% endblock %}

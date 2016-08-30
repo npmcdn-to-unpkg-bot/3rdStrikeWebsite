@@ -1,0 +1,109 @@
+{% extends "main_template.html" %}
+{% block content %}
+<div class="container">
+	<div class="row">
+		<div id="Main" class="container col-xs-8">
+		</div>
+		<div class="container col-xs-4">
+			<div>
+				<a href="https://www.facebook.com/groups/thirdstrikejunkies/" target="_"><img class="banner_image" src="static/images/fb-logo.png"/></a>
+				<img class="banner_image" src="static/images/twitter-logo.png"/>
+				<img class="banner_image" src="static/images/YouTube-social-square_dark_24px.png">
+			</div>
+			<br>
+			<div>
+				<p>Other Stuff</p>
+				<p>Dunno what'll go here.</p>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- First Row -->
+<div class="container">
+	<div class="row">
+		<div class="col-xs-6">
+			<h3 class="div_title">News/Blog</h3>
+		</div>
+		<div class="col-xs-6">
+			<h3 class="div_title">Columns</h3>
+		</div>
+		<div class="col-xs-6 infill">
+			<div class="row">
+				<!-- Articles = "article_N". N = ith position article. Pass through w/ a Python query. Use JS or Python to push to this ID -->
+				{% for post in posts %}
+					<div class="col-xs-6" style="background-image: url('{{ post.image_link }}'); position: relative; background-size: cover; height: 64px; overflow: hidden;">
+						<a id="post_link"
+						href="/news/{{ post.title }}">{{ post.title[:20] }}...</a>
+					</div>
+				{% endfor %}
+			</div>
+		</div>
+		<div class="col-xs-6 infill">
+			<div class="row">
+				<div id="post" class="col-xs-6">
+					<p>What Happened in 3s</p>
+				</div>
+				<div id="article_2" class="col-xs-6">
+					<p>What Happened in 3s</p>
+				</div>
+			</div>
+		</div>	
+	</div>
+</div>
+<!-- Second Row -->
+<div class="container">
+	<div class="row">
+		<div class="col-xs-6"><h3 class="div_title">Events</h3>
+			<div class="infill">
+				<!-- Image containers for events -->
+				<div class="row">
+					<div id="" class="col-xs-6 event_image">
+						<img src="static/images/summer.jpg">
+					</div>
+					<div class="col-xs-6 event_image">
+						<img src="static/images/events/nec.jpg">
+					</div>
+				</div>
+				<div class="row">
+					<div id="" class="col-xs-6 event_image">
+						<img src="static/images/events/tfc.jpg">
+					</div>
+					<div id="" class="col-xs-6 event_image">
+						<img src="static/images/LoganArcade.png">
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-6"><h3 class="div_title">Results</h3>
+
+			<div class="infill">
+				<div class="row">
+					<div class="col-xs-6">
+						<p>Inner stuff</p>
+					</div>
+					<div class="col-xs-6">
+						<p>Other stuff</p>
+					</div>
+				</div>
+			</div>
+		</div>		
+	</div>
+</div>
+<!-- Third Row -->
+<div class="container">
+	<div class="row">
+		<div class="col-xs-12">
+			<h3 class="div_title">Vids and Other Supa Hot Fire</h3>
+			<div class="row">
+				<div class="col-xs-6 infill">
+					<p>Inner stuff</p>
+					<p>News</p>
+				</div>
+				<div class="col-xs-6 infill">
+					<p>Other stuff</p>
+					<p>News</p>
+				</div>
+			</div>
+		</div>
+</div>
+{% endblock %}

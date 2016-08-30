@@ -135,3 +135,5 @@ class blogPosts(db.Model):
 	postText = db.Column(db.Text(), unique=True, nullable=False)
 	region = db.Column(db.String(64), unique=False, nullable=False)
 	date = db.Column(db.DATE(), unique=False, nullable=False, index=True)
+	image_link = db.Column(db.String(64), unique=False, nullable=False)
+	author = db.Column(db.String(64), unique=False, nullable=False)
