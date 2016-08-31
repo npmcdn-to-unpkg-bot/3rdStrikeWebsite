@@ -1,28 +1,6 @@
 {% extends "main_template.html" %}
 {% block content %}
-<script type="text/javascript">
-	var twitchUrl = "https://api.twitch.tv/kraken/streams/";
-	var twitchEnd = "?callback=?";
-	var channels = [];
-	var cleanName = [];
-	var chats = [];
-	var links = [];
-	{% for stream in streams %}
-	   channels.push("{{ stream.channelName }}");
-	   cleanName.push("{{ stream.cleanName }}" );
-	   chats.push("{{ stream.chats }}");
-	   links.push("{{ stream.link }}");
-	{% endfor %}
-	function show_hide_chat(iframeID) {
-		var frame = document.getElementById(iframeID);
-		if (frame.style.display != "none") {
-			frame.style.display = "none";
-		}
-		else {
-			frame.style.display = "initial";
-		}
-	}
-</script>
+
 
 <div class="container" id="Main">
 	<div class="row">
@@ -145,13 +123,13 @@
 	</div>
 </div>
 <!-- Third Row -->
-<div class="container">
+<div id="video_container" class="container">
 <h3 class="div_title">Vids and Other Supa Hot Fire</h3>
 	<div class="container Scroller" style="height: 180px; overflow-x: auto; border-style: solid;">
 		<div style="width: 500%; overflow-x: auto;">
-			{% for vid in vids %}
-			<span>{{ vid.iframe|safe }}</span>|
-			{% endfor %}
+		{% for video in vids %}
+			<span><iframe width="240" height="180" src="{{ video.iframe }}" frameborder="0" allowfullscreen></iframe></span>
+		{% endfor %}
 		</div>
 	</div>
 </div>
@@ -160,4 +138,35 @@
 <div class="container" id="bottomBar">
 	<h4>Thanks for visiting!</h4>
 </div>
+<script type="text/javascript">
+	var twitchUrl = "https://api.twitch.tv/kraken/streams/";
+	var twitchEnd = "?callback=?";
+	var channels = [];
+	var cleanName = [];
+	var chats = [];
+	var links = [];
+	{% for stream in streams %}
+	   channels.push("{{ stream.channelName }}");
+	   cleanName.push("{{ stream.cleanName }}" );
+	   chats.push("{{ stream.chats }}");
+	   links.push("{{ stream.link }}");
+	{% endfor %}
+	function show_hide_chat(iframeID) {
+		var frame = document.getElementById(iframeID);
+		if (frame.style.display != "none") {
+			frame.style.display = "none";
+		}
+		else {
+			frame.style.display = "initial";
+		}
+	}
+</script>
+<script type="text/javascript">
+	// Check if browser is firefox and hide video div.
+	var FIREFOX = /Firefox/i.test(navigator.userAgent);
+
+	if (FIREFOX) {
+	  document.getElementById("video_container").style.display="none";
+	}
+</script>
 {% endblock %}

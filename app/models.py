@@ -61,6 +61,8 @@ class Streams(db.Model):
 	link = db.Column(db.String(64))
 	chats = db.Column(db.String(64))
 	channelName = db.Column(db.String(64))
+	priority = db.Column(db.Integer)
+
 
 class CoolVids(db.Model):
 	__tablename__ = 'coolVids'

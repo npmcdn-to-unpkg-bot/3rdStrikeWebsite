@@ -29,7 +29,7 @@ def inject_locations():
 	locData = Locations.query.all()
 	return dict(locations=locData,
 		geos=geographies,
-		streams=Streams.query.all(),
+		streams=Streams.query.order_by(Streams.priority).all(),
 		jinjaLocData=locData,
 		live=LIVE,
 		)
@@ -47,7 +47,8 @@ def index():
 	blogs = blogPosts.query.filter_by(news="False")[::-1][:10] # Get 10 most recent blog posts
 	news = blogPosts.query.filter_by(news="True")[::-1][:10]
 	results_data = gen_results(start_date, end_date, sorted(leagues))
-	vids = CoolVids.query.all()[::-1]
+	vids = CoolVids.query.all()[::-1][:10]
+	for vid in vids: print(vid.iframe)
 	session.clear()
 	return render_template("index.html", news_articles=news, 
 		blog_posts=blogs, events=eventQuery, league_data=results_data, start=start_date, end=end_date, vids=vids)
