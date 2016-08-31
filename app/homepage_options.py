@@ -24,7 +24,9 @@ def gen_results(start_date=None, end_date=None, leagues=[]):
 		data["eloScore"] = [playerElo.get(p) for p in data.playerName]
 		data["wins"] = [wins.count(p) for p in data.playerName]
 		data["losses"] = [losses.count(p) for p in data.playerName]
-		data = data.sort_values(by=["eloScore", "wins", "losses"], ascending=[False, False, True])
+		try: data = data.sort_values(by=["eloScore", "wins", "losses"], ascending=[False, False, True])
+		except AttributeError: data = data.sort(columns=["eloScore", "wins", "losses"], 
+			ascending=[False, False, True])
 
 		results_data[l]["players"] = [i for i in data.playerName]
 		results_data[l]["eloScore"] = [i for i in data.eloScore]
