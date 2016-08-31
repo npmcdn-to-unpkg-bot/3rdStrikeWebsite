@@ -11,7 +11,8 @@ from app.homepage_options import gen_results
 # Home page parameters
 start_date = "1-1-2016"
 end_date = "2-1-2016"
-leagues = sorted(["ChiStrike", "PSN"]) # Iterable
+start_date, end_date = None, None
+leagues = sorted(["ChiStrike", "PSN"]) # Ensure these match with League Ids
 LIVE = False #Don't forget to turn me on when you're ready to launch
 # 
 
