@@ -62,6 +62,10 @@ class Streams(db.Model):
 	chats = db.Column(db.String(64))
 	channelName = db.Column(db.String(64))
 
+class CoolVids(db.Model):
+	__tablename__ = 'coolVids'
+	id = db.Column(db.Integer, primary_key=True)
+	iframe = db.Column(db.String(64))
 
 class Events(db.Model):
 	'''Hello world'''
@@ -114,6 +118,7 @@ class matchLog(db.Model):
 	eventID = db.Column(db.Integer)
 	winnerID = db.Column(db.Integer)
 	date = db.Column(db.String(64))
+	league = db.Column(db.String(64))
 
 
 class playerDB(db.Model):
@@ -139,3 +144,5 @@ class blogPosts(db.Model):
 	date = db.Column(db.DATE(), unique=False, nullable=False, index=True)
 	image_link = db.Column(db.String(64), unique=False, nullable=False)
 	author = db.Column(db.String(64), unique=False, nullable=False)
+	author_image = db.Column(db.String(64), unique=False, nullable=True)
+	news = db.Column(db.String(64), unique=False, nullable=False)

@@ -1,72 +1,17 @@
-{% extends "base_template.html" %}
+{% extends "main_template.html" %}
 {% import "bootstrap/wtf.html" as wtf %}
 
 {% block content %}
-	{% block change_message %}
-	{% for message in get_flashed_messages() %}
-			<div class="alert alert-warning">
-				<button type="button" class="close" data-dismiss="alert"> &times;</button> 
-				{{message}}
+	<div class="BlogHolder container">
+		{% for blog in blogs %}
+			<div>
+				<span>{{ blog.date }}</span>
+				<span><a href="/news/{{ blog.title }}">{{ blog.title }}</a></span>
+				<span>{{ blog.author }}</span>
+				{% if blog.author_image %}
+					<span><img class="author_image_small" src="{{ blog.author_image }}"></span>
+				{% endif %}
 			</div>
 		{% endfor %}
-	{% endblock %}
-<div class="container">
-<h2>{{ session.get('region', "General") }} Blog</h2>
-</div>
-<hr>
-
-<div class="container" align="center">
-	<div class="row">
-		<div class="col-xs-12 blogposts">
-		{% if recent %}
-			<h3>{{ recent.title }}</h3>
-			<div class="container">
-				{% for line in recent.postText.split("\n") %}
-					<p align="left">{{ line }}</p>
-				{% endfor %}
-			</div>
-			{% else %}
-			<h3>Blogs</h3>
-			{% endif %}
-		</div>	
 	</div>
-</div>
-<hr>
-
-<div class="container" align="center">
-	{% for post in blogData %}
-		<div class="row">
-			<div class="col-xs-12 blogposts">
-				<div class="container">
-					<a href="/blog/{{ post.title }}">{{ post.title }}</a>
-				</div>
-			</div>
-		</div>
-	{% endfor %}
-</div>
-<br>
-{% if form %}
-	<div class="container">
-		<form action="/blog" method="POST" type="text" onkeypress="return dontSubmit(event);">
-			{{ wtf.quick_form(form) }}
-			<!-- <dl>
-				<dt>Title:</dt>
-				<dd>{{ form.title }}</dd>
-				<dt>Post: </dt>
-				<dd>{{ form.body(cols="100", rows="10") }}</dd>
-			</dl>
-			{{ form.submit }} -->
-		</form>
-	 </div>
-{% endif %}
-<script type="text/javascript" src="static/jsUtils/utils.js">
-</script>
-{% endblock %}
-{% block bar %}
-<div class="social_media_bar">
-	<div class="container">
-		<a href="/temp"><img class="img-circle" src="/static/images/fb-logo.png"/></a>
-		<a href="/temp"><img class="img-circle" src="/static/images/twitter-logo.png"></a>
-	</div>
-</div>
 {% endblock %}

@@ -1,10 +1,16 @@
 {% extends 'main_template.html' %}
 {% block content %}
 	<div class="container">
-		<h2><strong>{{ title }}</strong></h2>
-		<h4>{{ author }}</h4>
+		<h2 style="text-decoration: underline;"><strong>{{ postData.title }}</strong></h2>
+		<span class="post_tile"><strong>{{ postData.author }}</strong></span>
+		<span><img class="author_image" src="{{ postData.author_image }}"/></span>
+		<h4>{{ postData.region }}</h4>
 		<hr>
-		<p>{{ text }}</p>
+		{% set split_text = postData.postText.split("\endLine") %}
+		{% for text in split_text %}
+			<!-- Now accepting HTML markup!!! -->
+			<p>{{ text|safe }}</p>
+		{% endfor %}
 	</div>
 <br><br><br>
 <div class="container">

@@ -5,12 +5,16 @@ from run import application, db
 from app import config, models
 from app.models import *
 import os
-from app.munge_data import main as munge
-
-munge()
+from app.homepage_options import gen_results
 
 
+# Home page parameters
+start_date = "1-1-2016"
+end_date = "2-1-2016"
+leagues = sorted(["ChiStrike", "PSN"]) # Iterable
 LIVE = False #Don't forget to turn me on when you're ready to launch
+# 
+
 geographies = ["Overall"]
 geographies += sorted(
 	list(
@@ -18,17 +22,13 @@ geographies += sorted(
 			[i.city for i in user.query.all()])
 		)
 	)
-locData = Locations.query.all()
-streamData = Streams.query.all()
-blogQuery = blogPosts.query.all()
-playerData = playerDB.query.all()
-eventData = Events.query.all()
 
 @application.context_processor
 def inject_locations():
+	locData = Locations.query.all()
 	return dict(locations=locData,
 		geos=geographies,
-		streams=streamData,
+		streams=Streams.query.all(),
 		jinjaLocData=locData,
 		live=LIVE,
 		)
@@ -40,42 +40,36 @@ def home():
 	return render_template("StreamPage.html")
 
 @application.route("/")
-@application.route("/index")
+@application.route("/index", methods=["GET"])
 def index():
-	postQuery = blogPosts.query.all()[::-1][:10] #Get 10 most recent blog posts
-	eventQuery = Events.query.all()
+	eventQuery = Events.query.all()[::-1]
+	blogs = blogPosts.query.filter_by(news="False")[::-1][:10] # Get 10 most recent blog posts
+	news = blogPosts.query.filter_by(news="True")[::-1][:10]
+	results_data = gen_results(start_date, end_date, leagues)
+	vids = CoolVids.query.all()[::-1]
+	print(vids[0].iframe)
 	session.clear()
-	for post in postQuery: print(post.image_link)
-	for event in eventQuery: print(event.image_url)
-	return render_template("index.html", posts=postQuery, events=eventQuery)
+	return render_template("index.html", news_articles=news, 
+		blog_posts=blogs, events=eventQuery, league_data=results_data, start=start_date, end=end_date, vids=vids)
+
+@application.route("/rankings")
+def rankings_search():
+	return '''Searchable rankings go here'''
 
 @application.route("/news/<article>")
 def news(article):
 	postQuery = blogPosts.query.filter_by(title=article)[0]
 	session.clear()
-	return render_template('news.html', title=postQuery.title, 
-		author=postQuery.author, text=postQuery.postText)
+	return render_template('news.html', postData=postQuery)
 
-# @application.route('/rankings')
-# def rankings():
-# 	return render_template("rankings.html")
+@application.route("/under_construction")
+def under_construction():
+	return '''Under Construction'''
 
-# @application.route('/blog', methods=["GET","POST"])
-# def blog():
-# 	mostRecentBlog = blogQuery[-1]
-# 	posts = blogQuery[:-1]
-# 	return render_template("blog.html", 
-# 		recent=mostRecentBlog, 
-# 		blogData=posts
-# 		)
-
-
-# @application.route('/blog/<article>')
-# def blogReader():
-# 	post = blogPosts.query.filter_by(title=article)[0]
-# 	return render_template("blogPage.html", 
-# 		articleName=article,
-# 		postText=post.postText)
+@application.route('/allBlogs')
+def blog():
+	blogs = blogPosts.query.all()[::-1]
+	return render_template("blog.html", blogs=blogs)
 
 # @application.route("/challenge")
 # def challengePage():
@@ -130,39 +124,6 @@ def news(article):
 # 		# 	return render_template('home.html', form=None, username=session['userName'], 
 # 		# 		results=otherPlayers, locations=gaming_places, geos=geographies)
 # 	return render_template("login.html", form=form)
-
-
-# @application.route("/register", methods=["GET", "POST"])
-# def register():
-# 	registerForm = NameForm()
-# 	# if registerForm.validate_on_submit():
-# 		# Check if username or email in database
-# 		# checkName = registerForm.userName
-# 		# if 
-# 			# Alert if username or email taken
-# 		# if not, add to db session and push to db
-# 		# then push to main page w/ session
-# 	return render_template("register.html", 
-# 		form=registerForm, 
-# 		)
-
-
-# @application.route("/agent")
-# def browser_check():
-# 	user_agent = request.headers.get('User-Agent')
-# 	return "<p>Your browser is {}</p>".format(user_agent)
-
-
-# @application.route('/rankings/<region>')
-# def region_rankings(region):
-# 	return render_template("rankings.html",region=region)
-
-
-# @application.route('/submit-your-story')
-# def blog_entry():
-# 	if session.get('username', None):
-# 		return temp()
-# 	return "Jacked up"
 
 @application.route('/logout', methods=["GET", "POST"])
 def logout():

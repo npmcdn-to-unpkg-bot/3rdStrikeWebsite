@@ -3,6 +3,7 @@ font-family: 'Josefin Sans', sans-serif;
 }
 #Main {
 	height: 256px;
+	padding-left: 5%;
 	width: 100%;
 	/*overflow: hidden;*/
 }
@@ -23,6 +24,7 @@ font-family: 'Josefin Sans', sans-serif;
 li {
 	color: black;
 }
+
 .div_title {
 	display: inline-block;
 	width: 100%;
@@ -71,16 +73,36 @@ li {
 	height: 192.5px;
 	overflow-y:auto;
 }
+.author_image {
+	height: 64px;
+	width: 64px;
+	border-radius: 50%;
+}
+.author_image {
+	height: 24px;
+	width: 24px;
+	border-radius: 50%;
+}
+.post_tile {
+	font-family: Impact;
+	font-size: 24px;
+	/*box-shadow: 0px 2px grey;*/
+}
+.BlogHolder {
+	height: 180px;
+	overflow-y: auto;
+}
 /*Below contains the bounce event for images.
 For some odd reason, code inserted afterwards isn't executed.*/
 .event {
-	background-size: cover;
+	background-size: contain;
 	position: relative;
+	left: 5;
+	bottom: 0;
 	height: 64px;
 	width: 90px;
-	padding-left: 2px;
 	overflow-y: auto;
-	border-radius: 10%;
+	border-radius: 100%;
 }
 .event:hover {
 	animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
