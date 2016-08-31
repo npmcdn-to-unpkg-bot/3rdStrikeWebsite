@@ -47,7 +47,6 @@ def index():
 	news = blogPosts.query.filter_by(news="True")[::-1][:10]
 	results_data = gen_results(start_date, end_date, leagues)
 	vids = CoolVids.query.all()[::-1]
-	print(vids[0].iframe)
 	session.clear()
 	return render_template("index.html", news_articles=news, 
 		blog_posts=blogs, events=eventQuery, league_data=results_data, start=start_date, end=end_date, vids=vids)
