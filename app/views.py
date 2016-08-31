@@ -46,7 +46,7 @@ def index():
 	eventQuery = Events.query.all()[::-1]
 	blogs = blogPosts.query.filter_by(news="False")[::-1][:10] # Get 10 most recent blog posts
 	news = blogPosts.query.filter_by(news="True")[::-1][:10]
-	results_data = gen_results(start_date, end_date, leagues)
+	results_data = gen_results(start_date, end_date, sorted(leagues))
 	vids = CoolVids.query.all()[::-1]
 	session.clear()
 	return render_template("index.html", news_articles=news, 

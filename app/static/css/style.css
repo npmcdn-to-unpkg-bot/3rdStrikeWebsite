@@ -102,8 +102,8 @@ For some odd reason, code inserted afterwards isn't executed.*/
 	position: relative;
 	padding-left: 10%;
 	bottom: 0;
-	height: 64px;
-	width: 90px;
+	height: 48px;
+	width: 48px;
 	overflow-y: auto;
 	border-radius: 100%;
 }

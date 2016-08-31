@@ -75,9 +75,10 @@
 				<h3 class="div_title"><strong>Leaderboard</strong>: {{ start }} - {{ end }}</h3>
 				<a href="/rankings">Search Rankings</a>
 			{% else %}
-				<h3 class="div_title"><strong>Leaderboard</strong> - <a href="/under_construction"><span>Event Search</span></a></h3>
+				<h3 class="div_title"><strong>Leaderboard</strong></h3>
+				<a href="/rankings">Search Rankings</a>
 			{% endif %}
-			<div align="center" class="Scroller" style="border-style: solid; height: 240px; overflow-y: auto; overflow-x: hidden;">
+			<div align="center" class="Scroller" style="border-style: solid; height: 240px; overflow-y: auto; overflow-x: auto;">
 				<div class="row">
 				<!-- Iteration through league -->
 				{% for league in league_data.keys() %}
