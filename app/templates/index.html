@@ -1,5 +1,29 @@
 {% extends "main_template.html" %}
 {% block content %}
+<script type="text/javascript">
+	var twitchUrl = "https://api.twitch.tv/kraken/streams/";
+	var twitchEnd = "?callback=?";
+	var channels = [];
+	var cleanName = [];
+	var chats = [];
+	var links = [];
+	{% for stream in streams %}
+	   channels.push("{{ stream.channelName }}");
+	   cleanName.push("{{ stream.cleanName }}" );
+	   chats.push("{{ stream.chats }}");
+	   links.push("{{ stream.link }}");
+	{% endfor %}
+	function show_hide_chat(iframeID) {
+		var frame = document.getElementById(iframeID);
+		if (frame.style.display != "none") {
+			frame.style.display = "none";
+		}
+		else {
+			frame.style.display = "initial";
+		}
+	}
+</script>
+
 <div class="container" id="Main">
 	<div class="row">
 		<div class="container col-xs-8" id="chiBanner">
@@ -19,7 +43,15 @@
 			<div id="linkHolder"></div>
 		</div>
 	</div>
+<div class="row">
+	<button onclick="show_hide_chat('vidChat')">Show/Hide Chat</button>
+	<div class="col-xs-12">
+		<iframe style="display: none; position: relative;" id="vidChat" frameborder="0" scrolling="no" src="http://twitch.tv/drpancakejdmba/chat?popout=" height="360px" width="50%">
+			    </iframe>
+	</div>
 </div>
+</div>
+<script type="text/javascript" src="/static/jsUtils/loadStreams.js"></script>
 <!-- First Row -->
 <div class="container" style="height:480px;">
 	<div class="row">
@@ -118,7 +150,7 @@
 	<div class="container Scroller" style="height: 180px; overflow-x: auto; border-style: solid;">
 		<div style="width: 500%; overflow-x: auto;">
 			{% for vid in vids %}
-			<span>{{ vid.iframe|safe }}</span>
+			<span>{{ vid.iframe|safe }}</span>|
 			{% endfor %}
 		</div>
 	</div>
@@ -126,21 +158,6 @@
 <br><br><br>
 <!-- Bottom Container -->
 <div class="container" id="bottomBar">
-	<h4>Nobody online? Here's some tunes</h4>
+	<h4>Thanks for visiting!</h4>
 </div>
-<script type="text/javascript">
-	var twitchUrl = "https://api.twitch.tv/kraken/streams/";
-	var twitchEnd = "?callback=?";
-	var channels = [];
-	var cleanName = [];
-	var chats = [];
-	var links = [];
-	{% for stream in streams %}
-	   channels.push("{{ stream.channelName }}");
-	   cleanName.push("{{ stream.cleanName }}" );
-	   chats.push("{{ stream.chats }}");
-	   links.push("{{ stream.link }}");
-	{% endfor %}
-</script>
-<script type="text/javascript" src="/static/jsUtils/loadStreams.js"></script>
 {% endblock %}

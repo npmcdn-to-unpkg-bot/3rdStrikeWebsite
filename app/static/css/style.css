@@ -42,7 +42,6 @@ li {
 	height: 180px;
 	width: 360px;
 	padding-right: 17px;
-	/*padding-top: 17px;*/
 	overflow-y: auto;
 }
 .infill:-webkit-scrollbar {

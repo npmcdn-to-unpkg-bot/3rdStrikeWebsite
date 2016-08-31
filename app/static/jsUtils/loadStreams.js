@@ -16,9 +16,6 @@ for (var i = 0; i < links.length; i++) {
 				document.getElementById('vidChat').src=chatLink;
 				document.getElementById(streamer).style.color = "red";
 			}
-			else {
-				document.getElementById(streamer).style.color = "black";
-			}
 		});
 	}(channels[i], link=links[i], chatLink=chats[i]));
 	
