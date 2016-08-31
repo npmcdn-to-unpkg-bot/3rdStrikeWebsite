@@ -5,8 +5,9 @@ for (var i = 0; i < links.length; i++) {
 	element.innerHTML = cleanName[i];	
 	element.id = channels[i];
 	element.className = "btn";
-	element.style.fontFamily = "Impact";
+	element.style.fontWeight = "bold";
 	element.style.letterSpacing = ".5px";
+	element.style.borderRadius = "15px 50px 30px";
 
 	$(document).ready(function(streamer, link, chatLink){
 		$.getJSON(twitchUrl+streamer+twitchEnd, function(data){
@@ -21,10 +22,11 @@ for (var i = 0; i < links.length; i++) {
 		});
 	}(channels[i], link=links[i], chatLink=chats[i]));
 	
-	
 	mainDiv.appendChild(element);
+
 	element.onclick = (function(link, chat, channelID) {
 		return function() {
+			// Update video and chat divs
 			var channel = document.getElementById(channelID);
 			var videoDiv = document.getElementById("video");
 			var chatWindow = document.getElementById("vidChat");

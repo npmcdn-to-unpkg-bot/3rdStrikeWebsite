@@ -2,21 +2,23 @@
 font-family: 'Josefin Sans', sans-serif;
 }
 #Main {
-	/*background-color: black;*/
-	background-image: url("/static/images/League image.jpg");
-	background-size: cover;
-	background-repeat: no-repeat;
-	height: 240px;
-	width: 480px;
+	height: 256px;
+	width: 100%;
+	/*overflow: hidden;*/
 }
-.navbar-brand a:hover {
-	color: black;
+#bottomBar {
+	background-color: black;
+	position: fixed;
+	z-index: 100;
+	bottom: 0;
+	left: 0;
+	width: 100%
 }
 .navbar {
 	border-style: none;
-	/*border-bottom-style: thin;*/
-	background-color: white;
+	background-color: black;
 	color: black;
+	text-transform: none;
 }
 li {
 	color: black;
@@ -33,9 +35,6 @@ li {
 	padding-left: 1px;
 	padding-right: 1px;
 }
-.row {
-	overflow: hidden;
-}
 .infill {
 	background-size: contain;
 	height: 180px;
@@ -44,30 +43,65 @@ li {
 	/*padding-top: 17px;*/
 	overflow-y: auto;
 }
-.infill::-webkit-scrollbar {
+.infill:-webkit-scrollbar {
 	width: 2px;
 }
-.event_image {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	overflow: hidden;
-	border-radius: 10%;
-}
 .post_background {
-	/*Temporary image overlayer*/
-	background-image: url('/static/images/night_club.jpg');
+	background-size: cover;
 	position: relative;
 	height: 64px;
 	width: 50%;
 }
-#post_link {
-	position: absolute; 
-	background-color: black; 
+.post_link {
+	position: absolute;
+	background-color: black;
 	opacity: .5;
-	bottom: 0; 
-	left: 0; 
-	width: 100%; 
+	bottom: 0;
+	right: 5;
+	width: 80%;
 }
-#HitPoint {
+.post_link:hover {
+	color: gold;
+	text-decoration: none;
 }
+.post_link:visited {
+	text-decoration: line-through;
+}
+#linkHolder {
+	height: 192.5px;
+	overflow-y:auto;
+}
+/*Below contains the bounce event for images.
+For some odd reason, code inserted afterwards isn't executed.*/
+.event {
+	background-size: cover;
+	position: relative;
+	height: 64px;
+	width: 90px;
+	padding-left: 2px;
+	overflow-y: auto;
+	border-radius: 10%;
+}
+.event:hover {
+	animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+	transform: translate3d(0, 0, 0);
+	backface-visibility: hidden;
+	z-index: 2;
+	perspective: 1000px;
+}
+@keyframes shake {
+  10%, 90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+  
+  20%, 80% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  30%, 50%, 70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+
+  40%, 60% {
+    transform: translate3d(4px, 0, 0);
+  }

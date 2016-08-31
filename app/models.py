@@ -75,6 +75,7 @@ class Events(db.Model):
 	Lat = db.Column(db.Float())
 	Lon = db.Column(db.Float())
 	url = db.Column(db.String(64))
+	image_url = db.Column(db.String(64))
 
 
 class user(db.Model):
@@ -112,6 +113,7 @@ class matchLog(db.Model):
 	char2 = db.Column(db.String(64))
 	eventID = db.Column(db.Integer)
 	winnerID = db.Column(db.Integer)
+	date = db.Column(db.String(64))
 
 
 class playerDB(db.Model):

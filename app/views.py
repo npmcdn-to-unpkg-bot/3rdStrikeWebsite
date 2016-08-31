@@ -5,7 +5,9 @@ from run import application, db
 from app import config, models
 from app.models import *
 import os
+from app.munge_data import main as munge
 
+munge()
 
 
 LIVE = False #Don't forget to turn me on when you're ready to launch
@@ -20,6 +22,7 @@ locData = Locations.query.all()
 streamData = Streams.query.all()
 blogQuery = blogPosts.query.all()
 playerData = playerDB.query.all()
+eventData = Events.query.all()
 
 @application.context_processor
 def inject_locations():
@@ -40,15 +43,18 @@ def home():
 @application.route("/index")
 def index():
 	postQuery = blogPosts.query.all()[::-1][:10] #Get 10 most recent blog posts
+	eventQuery = Events.query.all()
 	session.clear()
 	for post in postQuery: print(post.image_link)
-	return render_template("index.html", posts=postQuery)
+	for event in eventQuery: print(event.image_url)
+	return render_template("index.html", posts=postQuery, events=eventQuery)
 
 @application.route("/news/<article>")
 def news(article):
 	postQuery = blogPosts.query.filter_by(title=article)[0]
 	session.clear()
-	return render_template('news.html', title=postQuery.title, text=postQuery.postText)
+	return render_template('news.html', title=postQuery.title, 
+		author=postQuery.author, text=postQuery.postText)
 
 # @application.route('/rankings')
 # def rankings():
