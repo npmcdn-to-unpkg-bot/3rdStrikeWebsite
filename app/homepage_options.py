@@ -6,7 +6,7 @@ Edits here adjust home page parameters.
 '''
 
 def gen_results(start_date=None, end_date=None, leagues=[]):
-	from pandas import Series, DataFrame
+	import pandas as pd
 	from app.munge_data import main as generate_rankings
 	results_data = {l: {} for l in leagues}
 	for l in results_data.keys():
@@ -14,17 +14,17 @@ def gen_results(start_date=None, end_date=None, leagues=[]):
 			generate_rankings(start_date, end_date, l)
 		
 		playerElo = results_data[l]["player_elo"]
-		players = Series([i for i in playerElo.keys()])
+		players = pd.Series([i for i in playerElo.keys()])
 		raw_data = results_data[l]["data"]
 		wins = [i for i in raw_data.winnerID]
 		losses = [i for i in raw_data.loserID]
 		del results_data[l]["data"]
 		
-		data = DataFrame(players, columns=["playerName"])
+		data = pd.DataFrame(players, columns=["playerName"])
 		data["eloScore"] = [playerElo.get(p) for p in data.playerName]
 		data["wins"] = [wins.count(p) for p in data.playerName]
 		data["losses"] = [losses.count(p) for p in data.playerName]
-		data = data.sort_values(by=["eloScore", "wins", "losses"], ascending=[False, False, True]).copy()
+		data = data.sort_values(by=["eloScore", "wins", "losses"], ascending=[False, False, True])
 
 		results_data[l]["players"] = [i for i in data.playerName]
 		results_data[l]["eloScore"] = [i for i in data.eloScore]

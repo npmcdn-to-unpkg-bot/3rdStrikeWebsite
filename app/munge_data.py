@@ -3,9 +3,12 @@ from app.models import *
 import pandas as pd
 from app.elo_class import elo_score_generator
 import sqlite3, os
+from app.views import LIVE
 
 def main(start_date=None, end_date=None, league=None):
-	con = sqlite3.connect('app/database.sqlite')
+	
+	try: con = sqlite3.connect('app/database.sqlite')
+	except: con = sqlite3.connect('3rd Strike/3rdStrikeWebsite/app/database.sqlite')
 
 	data = pd.read_sql_query("SELECT * FROM matchLog", con=con)
 
