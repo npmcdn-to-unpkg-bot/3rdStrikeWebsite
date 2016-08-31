@@ -110,7 +110,7 @@ class user(db.Model):
 class matchLog(db.Model):
 	'''Hello world'''
 	__tablename__ = 'matchLog'
-	# id = db.Column(db.Integer, primary_key=True)
+	id = db.Column(db.Integer, primary_key=True)
 	p1 = db.Column(db.String(64))
 	p2 = db.Column(db.String(64))
 	char1 = db.Column(db.String(64))
