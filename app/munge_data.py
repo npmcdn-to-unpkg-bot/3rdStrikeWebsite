@@ -5,7 +5,7 @@ from app.elo_class import elo_score_generator
 import sqlite3
 
 def main(start_date=None, end_date=None, league=None):
-	con = sqlite3.connect('app/database.sqlite')
+	con = sqlite3.connect('/app/database.sqlite')
 
 	data = pd.read_sql_query("SELECT * FROM matchLog", con=con)
 
